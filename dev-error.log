@@ -1,0 +1,53 @@
+
+[41m[30m ERROR [39m[49m [31mInternal server error: v-else/v-else-if has no adjacent v-if or v-else-if.[39m
+  Plugin: [35mvite:vue[39m
+  File: [36mC:/laragon/www/dsoba-mobile-demo/app.vue[39m:15:1
+[33m  13 |  
+  14 |  C:\Users\tanky
+  15 |  <section v-else-if="route==='about'||route==='chapters'" class="p-5 py-8"><p class="text-xs font-bold tracking-wider ...
+     |   ^
+  16 |  
+  17 |  <section v-else-if="route==='news'||route==='news-detail'" class="p-5 py-8"><p class="text-xs font-bold text-wine">DS...[39m
+      at createCompilerError (C:\laragon\www\dsoba-mobile-demo\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:1378:17)
+      at processIf (C:\laragon\www\dsoba-mobile-demo\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:4782:11)
+      at C:\laragon\www\dsoba-mobile-demo\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:4684:12
+      at Array.<anonymous> (C:\laragon\www\dsoba-mobile-demo\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:3665:26)
+      at traverseNode (C:\laragon\www\dsoba-mobile-demo\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:3607:38)
+      at traverseChildren (C:\laragon\www\dsoba-mobile-demo\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:3599:5)
+      at traverseNode (C:\laragon\www\dsoba-mobile-demo\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:3642:7)
+      at traverseChildren (C:\laragon\www\dsoba-mobile-demo\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:3599:5)
+      at traverseNode (C:\laragon\www\dsoba-mobile-demo\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:3642:7)
+      at transform (C:\laragon\www\dsoba-mobile-demo\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:3535:3)
+
+
+[41m[30m ERROR [39m[49m Pre-transform error: v-else/v-else-if has no adjacent v-if or v-else-if.
+  Plugin: [35mvite:vue[39m
+  File: [36mC:/laragon/www/dsoba-mobile-demo/app.vue[39m:15:1
+[33m  13 |  
+  14 |  C:\Users\tanky
+  15 |  <section v-else-if="route==='about'||route==='chapters'" class="p-5 py-8"><p class="text-xs font-bold tracking-wider ...
+     |   ^
+  16 |  
+  17 |  <section v-else-if="route==='news'||route==='news-detail'" class="p-5 py-8"><p class="text-xs font-bold text-wine">DS...[39m
+
+
+[41m[30m ERROR [39m[49m [31mInternal server error: v-else/v-else-if has no adjacent v-if or v-else-if.[39m
+  Plugin: [35mvite:vue[39m
+  File: [36mC:/laragon/www/dsoba-mobile-demo/app.vue[39m:15:1
+[33m  13 |  
+  14 |  C:\Users\tanky
+  15 |  <section v-else-if="route==='about'||route==='chapters'" class="p-5 py-8"><p class="text-xs font-bold tracking-wider ...
+     |   ^
+  16 |  
+  17 |  <section v-else-if="route==='news'||route==='news-detail'" class="p-5 py-8"><p class="text-xs font-bold text-wine">DS...[39m
+      at createCompilerError (C:\laragon\www\dsoba-mobile-demo\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:1378:17)
+      at processIf (C:\laragon\www\dsoba-mobile-demo\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:4782:11)
+      at C:\laragon\www\dsoba-mobile-demo\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:4684:12
+      at Array.<anonymous> (C:\laragon\www\dsoba-mobile-demo\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:3665:26)
+      at traverseNode (C:\laragon\www\dsoba-mobile-demo\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:3607:38)
+      at traverseChildren (C:\laragon\www\dsoba-mobile-demo\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:3599:5)
+      at traverseNode (C:\laragon\www\dsoba-mobile-demo\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:3642:7)
+      at traverseChildren (C:\laragon\www\dsoba-mobile-demo\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:3599:5)
+      at traverseNode (C:\laragon\www\dsoba-mobile-demo\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:3642:7)
+      at transform (C:\laragon\www\dsoba-mobile-demo\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:3535:3)
+
