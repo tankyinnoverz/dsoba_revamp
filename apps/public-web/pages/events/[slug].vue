@@ -1,0 +1,1 @@
+<template><div class="mx-auto max-w-3xl px-6 py-20"><p class="text-xs font-bold uppercase tracking-[.2em] text-[#7a2737]">Event</p><h1 class="serif mt-4 text-5xl">105th Annual Dinner</h1><p class="mt-6 leading-8 text-[#102231]/70">Structured event detail placeholder with future registration integration.</p></div></template>

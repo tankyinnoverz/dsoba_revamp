@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --navy:#102231; --wine:#7a2737; --gold:#d6ad55; --paper:#f4efe7; }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--paper); color:var(--navy); font-family:Manrope, sans-serif; }
+.serif { font-family:'DM Serif Display', Georgia, serif; }
+.grain { background-image: radial-gradient(rgba(16,34,49,.06) .7px, transparent .7px); background-size:5px 5px; }

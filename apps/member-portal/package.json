@@ -1,0 +1,1 @@
+{"name":"@dsoba/member-portal","private":true,"type":"module","scripts":{"dev":"nuxt dev --port 3001","build":"nuxt build","lint":"nuxt typecheck","test":"node -e \"console.log('member-portal smoke test placeholder')\""},"dependencies":{"@nuxtjs/tailwindcss":"^6.14.0","nuxt":"^3.16.0"},"devDependencies":{"typescript":"^5.7.2","vue-tsc":"^2.2.0"}}

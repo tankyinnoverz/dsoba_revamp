@@ -1,1 +1,16 @@
-{"name":"dsoba-mobile-demo","private":true,"type":"module","scripts":{"dev":"nuxt dev","build":"nuxt build"},"devDependencies":{"@nuxt/kit":"^4.4.8","@nuxtjs/tailwindcss":"^6.14.0","nuxt":"^3.16.0"}}
+{
+  "name": "dsoba2026",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "dev": "corepack pnpm dev:public",
+    "dev:public": "corepack pnpm --filter @dsoba/public-web dev",
+    "dev:portal": "corepack pnpm --filter @dsoba/member-portal dev",
+    "dev:admin": "corepack pnpm --filter @dsoba/admin-portal dev",
+    "dev:api": "corepack pnpm --filter @dsoba/api dev",
+    "build": "corepack pnpm -r build",
+    "lint": "corepack pnpm -r lint",
+    "test": "corepack pnpm -r test"
+  }
+}

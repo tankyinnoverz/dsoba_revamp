@@ -1,0 +1,6 @@
+<template>
+  <div class="grain min-h-screen">
+    <section class="bg-[#102231] px-6 py-24 text-white"><div class="mx-auto max-w-6xl"><p class="text-xs font-bold uppercase tracking-[.24em] text-[#d6ad55]">Editorial Heritage · 2026</p><h1 class="serif mt-5 max-w-3xl text-6xl leading-[.95] md:text-8xl">A lifelong connection.</h1><p class="mt-6 max-w-lg text-lg leading-8 text-white/70">Community, conversation and shared purpose across generations of Old Boys.</p><NuxtLink to="/events" class="mt-8 inline-block rounded-full bg-[#d6ad55] px-5 py-3 text-sm font-bold text-[#102231]">Explore events</NuxtLink></div></section>
+    <section class="mx-auto max-w-6xl px-6 py-16"><p class="text-xs font-bold uppercase tracking-[.2em] text-[#7a2737]">What's new</p><h2 class="serif mt-2 text-4xl">From the association</h2><div class="mt-8 grid gap-4 md:grid-cols-3"><article v-for="item in ['A note from the President','Annual Dinner committee welcomes volunteers','Dragon Boat Team brings home an award']" :key="item" class="rounded-2xl bg-white p-6 shadow-sm"><h3 class="serif text-2xl">{{item}}</h3><p class="mt-6 text-xs text-[#102231]/50">Structured mock content · Sprint 0</p></article></div></section>
+  </div>
+</template>

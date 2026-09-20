@@ -1,0 +1,1 @@
+<template><div class="mx-auto max-w-3xl px-6 py-20"><p class="text-xs font-bold uppercase tracking-[.2em] text-[#7a2737]">News story</p><h1 class="serif mt-4 text-5xl">A note from the President</h1><p class="mt-6 leading-8 text-[#102231]/70">Structured content placeholder for the future CMS-backed editorial detail page.</p></div></template>
