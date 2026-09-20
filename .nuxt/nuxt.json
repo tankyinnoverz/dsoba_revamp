@@ -1,9 +1,9 @@
 {
-  "_hash": "3bUx7lKZw3IJA74NgmcDbw7fsT0J3X87L17ovC8pNA0",
+  "_hash": "3AxWucLWof9FNoclucvghbQeS4jVCzgAyJ8SbZ09Q20",
   "project": {
     "rootDir": "C:/local-server/dsoba-mobile-demo"
   },
   "versions": {
-    "nuxt": "3.21.8"
+    "nuxt": "3.21.11"
   }
 }

@@ -4084,7 +4084,7 @@ function _expandFromEnv(value) {
 const _inlineRuntimeConfig = {
   "app": {
     "baseURL": "/",
-    "buildId": "a2518c42-b20f-430e-8343-46ea8550dd2f",
+    "buildId": "e056cf8d-0bb3-46cb-abe5-fe35719763b5",
     "buildAssetsDir": "/_nuxt/",
     "cdnURL": ""
   },
@@ -4575,19 +4575,19 @@ _txZdlMdLUFHtUDNQHTAA4zhOaheIvZljxOTiywKGH94
 ];
 
 const assets = {
+  "/assets/campus.jpg": {
+    "type": "image/jpeg",
+    "etag": "\"1cb03-OB6MGBLzRCIrcwOEQi7LJ9XM6x4\"",
+    "mtime": "2026-05-17T07:23:00.000Z",
+    "size": 117507,
+    "path": "../public/assets/campus.jpg"
+  },
   "/assets/annual-dinner-105-info.jpeg": {
     "type": "image/jpeg",
     "etag": "\"4b4a3-/DiblV18bvSIGDQFmzkQ62HEUYI\"",
     "mtime": "2026-05-17T18:12:06.000Z",
     "size": 308387,
     "path": "../public/assets/annual-dinner-105-info.jpeg"
-  },
-  "/assets/chapter-dinner.jpeg": {
-    "type": "image/jpeg",
-    "etag": "\"3a9fe-1ihrtUqasEsj87kQpBPpVlMNJO4\"",
-    "mtime": "2026-06-22T09:25:17.305Z",
-    "size": 240126,
-    "path": "../public/assets/chapter-dinner.jpeg"
   },
   "/assets/chapter-dinner-event.jpeg": {
     "type": "image/jpeg",
@@ -4603,12 +4603,12 @@ const assets = {
     "size": 363568,
     "path": "../public/assets/annual-dinner-venue.jpg"
   },
-  "/assets/campus.jpg": {
+  "/assets/chapter-dinner.jpeg": {
     "type": "image/jpeg",
-    "etag": "\"1cb03-OB6MGBLzRCIrcwOEQi7LJ9XM6x4\"",
-    "mtime": "2026-05-17T07:23:00.000Z",
-    "size": 117507,
-    "path": "../public/assets/campus.jpg"
+    "etag": "\"3a9fe-1ihrtUqasEsj87kQpBPpVlMNJO4\"",
+    "mtime": "2026-06-22T09:25:17.305Z",
+    "size": 240126,
+    "path": "../public/assets/chapter-dinner.jpeg"
   },
   "/assets/charity-service-event.jpeg": {
     "type": "image/jpeg",
@@ -4616,6 +4616,13 @@ const assets = {
     "mtime": "2026-06-22T09:25:00.775Z",
     "size": 190459,
     "path": "../public/assets/charity-service-event.jpeg"
+  },
+  "/assets/dragonboat-award.jpeg": {
+    "type": "image/jpeg",
+    "etag": "\"4bb5e-QLRYXkxEauUBqUFPjrCByzf5wlQ\"",
+    "mtime": "2026-06-22T09:25:07.633Z",
+    "size": 310110,
+    "path": "../public/assets/dragonboat-award.jpeg"
   },
   "/assets/dinner.jpg": {
     "type": "image/jpeg",
@@ -4631,47 +4638,12 @@ const assets = {
     "size": 388033,
     "path": "../public/assets/charity-service.jpeg"
   },
-  "/assets/dragonboat-award.jpeg": {
-    "type": "image/jpeg",
-    "etag": "\"4bb5e-QLRYXkxEauUBqUFPjrCByzf5wlQ\"",
-    "mtime": "2026-06-22T09:25:07.633Z",
-    "size": 310110,
-    "path": "../public/assets/dragonboat-award.jpeg"
-  },
   "/assets/happy-hour-event.jpeg": {
     "type": "image/jpeg",
     "etag": "\"2363a-KBcaYmq92HEnvjh5br5uG99tdA4\"",
     "mtime": "2026-06-22T09:25:41.223Z",
     "size": 144954,
     "path": "../public/assets/happy-hour-event.jpeg"
-  },
-  "/assets/happy-hour.jpeg": {
-    "type": "image/jpeg",
-    "etag": "\"2363a-KBcaYmq92HEnvjh5br5uG99tdA4\"",
-    "mtime": "2026-06-22T09:25:41.223Z",
-    "size": 144954,
-    "path": "../public/assets/happy-hour.jpeg"
-  },
-  "/_nuxt/Bdw7JaQQ.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"d45-jKXlXKXjbE0fVZjJK8HzSHmWjR8\"",
-    "mtime": "2026-06-22T10:23:38.162Z",
-    "size": 3397,
-    "path": "../public/_nuxt/Bdw7JaQQ.js"
-  },
-  "/assets/logo.png": {
-    "type": "image/png",
-    "etag": "\"83a0-Hx5iU5gEBuVGDzRKcVvE/b9sQ10\"",
-    "mtime": "2026-05-17T07:59:42.000Z",
-    "size": 33696,
-    "path": "../public/assets/logo.png"
-  },
-  "/_nuxt/Cs5MjpPm.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"2652-AXw5QsdfJeC7EdF2V6i37lCTdsI\"",
-    "mtime": "2026-06-22T10:23:38.162Z",
-    "size": 9810,
-    "path": "../public/_nuxt/Cs5MjpPm.js"
   },
   "/assets/home-centenary-banner.jpg": {
     "type": "image/jpeg",
@@ -4680,26 +4652,54 @@ const assets = {
     "size": 103098,
     "path": "../public/assets/home-centenary-banner.jpg"
   },
-  "/_nuxt/CL-hBR-W.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"2bfd8-45bFgRc2lNJ/KZe6+icU3Ow+JIw\"",
-    "mtime": "2026-06-22T10:23:38.162Z",
-    "size": 180184,
-    "path": "../public/_nuxt/CL-hBR-W.js"
+  "/assets/happy-hour.jpeg": {
+    "type": "image/jpeg",
+    "etag": "\"2363a-KBcaYmq92HEnvjh5br5uG99tdA4\"",
+    "mtime": "2026-06-22T09:25:41.223Z",
+    "size": 144954,
+    "path": "../public/assets/happy-hour.jpeg"
   },
-  "/_nuxt/Dycu5f-f.js": {
+  "/assets/logo.png": {
+    "type": "image/png",
+    "etag": "\"83a0-Hx5iU5gEBuVGDzRKcVvE/b9sQ10\"",
+    "mtime": "2026-05-17T07:59:42.000Z",
+    "size": 33696,
+    "path": "../public/assets/logo.png"
+  },
+  "/_nuxt/BGTgGXjF.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"149-X60Nzoq6p4z00O2xKF89d79+VGU\"",
-    "mtime": "2026-06-22T10:23:38.162Z",
+    "etag": "\"2652-yge8HLIFrQ+FFKUQnGfyU4irtrI\"",
+    "mtime": "2026-07-14T11:55:02.720Z",
+    "size": 9810,
+    "path": "../public/_nuxt/BGTgGXjF.js"
+  },
+  "/_nuxt/B7RppZQF.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"2ec74-s7e+1PQcY0cRItkWol6lpdhUiLY\"",
+    "mtime": "2026-07-14T11:55:02.722Z",
+    "size": 191604,
+    "path": "../public/_nuxt/B7RppZQF.js"
+  },
+  "/_nuxt/C-4jfVYM.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"149-3ee4W13feVC9+luQJlOjmn7hPtQ\"",
+    "mtime": "2026-07-14T11:55:02.720Z",
     "size": 329,
-    "path": "../public/_nuxt/Dycu5f-f.js"
+    "path": "../public/_nuxt/C-4jfVYM.js"
   },
   "/_nuxt/error-404.DL_4WIao.css": {
     "type": "text/css; charset=utf-8",
     "etag": "\"dca-KnjyV0UbpsrliiJzZx69defY74k\"",
-    "mtime": "2026-06-22T10:23:38.162Z",
+    "mtime": "2026-07-14T11:55:02.719Z",
     "size": 3530,
     "path": "../public/_nuxt/error-404.DL_4WIao.css"
+  },
+  "/_nuxt/error-500.I1Dtv2V5.css": {
+    "type": "text/css; charset=utf-8",
+    "etag": "\"75a-vEGyJqldBVJrnMfcLsrGaHcxYl0\"",
+    "mtime": "2026-07-14T11:55:02.720Z",
+    "size": 1882,
+    "path": "../public/_nuxt/error-500.I1Dtv2V5.css"
   },
   "/assets/community-mingle.jpeg": {
     "type": "image/jpeg",
@@ -4715,33 +4715,26 @@ const assets = {
     "size": 624123,
     "path": "../public/assets/dragonboat.jpeg"
   },
-  "/_nuxt/error-500.I1Dtv2V5.css": {
-    "type": "text/css; charset=utf-8",
-    "etag": "\"75a-vEGyJqldBVJrnMfcLsrGaHcxYl0\"",
-    "mtime": "2026-06-22T10:23:38.162Z",
-    "size": 1882,
-    "path": "../public/_nuxt/error-500.I1Dtv2V5.css"
+  "/_nuxt/Vm6VJWIh.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"d45-d2G+h0EMO4S90v94nxsYnaxdHLU\"",
+    "mtime": "2026-07-14T11:55:02.720Z",
+    "size": 3397,
+    "path": "../public/_nuxt/Vm6VJWIh.js"
+  },
+  "/_nuxt/builds/meta/e056cf8d-0bb3-46cb-abe5-fe35719763b5.json": {
+    "type": "application/json",
+    "etag": "\"58-0hVjy2w2gMf8Sug+V2yVpRe7cG8\"",
+    "mtime": "2026-07-14T11:55:05.057Z",
+    "size": 88,
+    "path": "../public/_nuxt/builds/meta/e056cf8d-0bb3-46cb-abe5-fe35719763b5.json"
   },
   "/_nuxt/builds/latest.json": {
     "type": "application/json",
-    "etag": "\"47-F7duqEfMG75uUzUTyMz9sdl7oWQ\"",
-    "mtime": "2026-06-22T10:23:40.663Z",
+    "etag": "\"47-2Sp0IKGRVpr22luC8cAMsEzdi54\"",
+    "mtime": "2026-07-14T11:55:05.057Z",
     "size": 71,
     "path": "../public/_nuxt/builds/latest.json"
-  },
-  "/_nuxt/builds/meta/a2518c42-b20f-430e-8343-46ea8550dd2f.json": {
-    "type": "application/json",
-    "etag": "\"58-FVAaw1Jld2BYfwnNIUYfsn3TeT8\"",
-    "mtime": "2026-06-22T10:23:40.665Z",
-    "size": 88,
-    "path": "../public/_nuxt/builds/meta/a2518c42-b20f-430e-8343-46ea8550dd2f.json"
-  },
-  "/assets/grand-steps.jpg": {
-    "type": "image/jpeg",
-    "etag": "\"2f6cbc-tekh7NHX1ZjU3nG4QfgKRNhy03o\"",
-    "mtime": "2026-05-17T09:24:14.000Z",
-    "size": 3108028,
-    "path": "../public/assets/grand-steps.jpg"
   },
   "/assets/field.jpg": {
     "type": "image/jpeg",
@@ -4749,6 +4742,13 @@ const assets = {
     "mtime": "2026-05-17T09:24:14.000Z",
     "size": 3104634,
     "path": "../public/assets/field.jpg"
+  },
+  "/assets/grand-steps.jpg": {
+    "type": "image/jpeg",
+    "etag": "\"2f6cbc-tekh7NHX1ZjU3nG4QfgKRNhy03o\"",
+    "mtime": "2026-05-17T09:24:14.000Z",
+    "size": 3108028,
+    "path": "../public/assets/grand-steps.jpg"
   },
   "/assets/Gemini_Generated_Image_l3q6ikl3q6ikl3q6.png": {
     "type": "image/png",

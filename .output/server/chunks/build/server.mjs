@@ -681,32 +681,34 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       { id: "annual-volunteers", title: "Annual Dinner committee welcomes volunteers", date: "08 Jun 2026", category: "Annual Dinner", excerpt: "Join the working team shaping this year’s landmark gathering and community showcase.", image: "/assets/chapter-dinner-event.jpeg" },
       { id: "dragonboat-win", title: "Dragon Boat Team brings home an award", date: "23 May 2026", category: "Sports", excerpt: "A brilliant result after months of training, teamwork and support from fellow Old Boys.", image: "/assets/dragonboat-award.jpeg" },
       { id: "summer-happy-hour", title: "Summer alumni Happy Hour", date: "12 May 2026", category: "Social", excerpt: "An easy evening in Central for alumni across years, chapters and professions.", image: "/assets/happy-hour-event.jpeg" },
-      { id: "cfl-scholarship", title: "CFL Trust scholarship update", date: "30 Apr 2026", category: "Community", excerpt: "A short update on education support and the impact of alumni contributions.", color: "bg-wine" },
-      { id: "chapter-dinner-news", title: "Professional Chapters Dinner highlights", date: "19 Apr 2026", category: "Chapters", excerpt: "Members from five professional chapters gathered for exchange, mentoring and dinner.", image: "/assets/chapter-dinner-event.jpeg" },
-      { id: "overseas-london", title: "Overseas alumni gathering — London", date: "08 Apr 2026", category: "Overseas", excerpt: "A simple notice for Old Boys based in the United Kingdom.", color: "bg-[#263a4a]" },
+      { id: "cfl-scholarship", title: "CLF Trust scholarship update", date: "30 Apr 2026", category: "Community", excerpt: "A short update on education support and the impact of alumni contributions.", color: "bg-wine" },
+      { id: "chapter-dinner-news", title: "Professional Chapter Dinner highlights", date: "19 Apr 2026", category: "Chapters", excerpt: "Members from five professional chapter groups gathered for exchange, mentoring and dinner.", image: "/assets/chapter-dinner-event.jpeg" },
+      { id: "overseas-london", title: "Overseas Chapter gathering — London", date: "08 Apr 2026", category: "Overseas", excerpt: "A simple notice for Old Boys based in the United Kingdom.", color: "bg-[#263a4a]" },
       { id: "charity-service-news", title: "Alumni families serve together", date: "24 Mar 2026", category: "Community", excerpt: "A practical service day bringing alumni and families together in Kowloon.", image: "/assets/charity-service-event.jpeg" }
     ];
     const activeNews = computed(() => news.find((n) => n.id === selectedNews.value) || news[0]);
     const publicGroups = [
-      { label: "About", items: [["About DSOBA", "about"], ["Mission", "about-mission"], ["General Committee", "about-general-committee"], ["Past Presidents", "about-past-presidents"], ["CFL Trust", "about-cfl"]] },
-      { label: "Chapters & Groups", items: [["Professional Chapters", "professional-chapters"], ["Interest Groups", "interest-groups"], ["Overseas", "overseas"]] },
+      { label: "About", items: [["About DSOBA", "about"], ["Our Mission", "about-mission"], ["General Committee", "about-general-committee"], ["Past Presidents", "about-past-presidents"], ["CLF Trust", "about-cfl"]] },
+      { label: "Music", items: [["Music", "group-music"]] },
+      { label: "Sports", items: [["Sports", "group-sports"]] },
+      { label: "Chapters", items: [["Professional Chapter", "professional-chapters"], ["Overseas Chapter", "overseas"]] },
       { label: "News", items: [["News", "news"]] },
       { label: "Events", items: [["Upcoming Events", "events"], ["Past Events", "events-past"], ["Social Activities", "events-social"], ["Annual Dinner", "event-detail"]] },
       { label: "Membership", items: [["Why Join", "membership-why"], ["Life / Trial / Youth", "membership-types"], ["Apply Now", "membership-apply"], ["Enquiry", "membership-enquiry"], ["DSOBA Credit Card", "membership-credit-card"]] }
     ];
     const contentPages = {
-      "about-mission": { eyebrow: "About DSOBA", title: "Our mission", intro: "Connect Old Boys across generations, strengthen fellowship and support the school community.", items: ["Build lasting alumni connections", "Support the school and charitable initiatives", "Create professional and social opportunities"] },
+      "about-mission": { eyebrow: "About DSOBA", title: "Our Mission", intro: "Connect Old Boys across generations, strengthen fellowship and support the school community.", items: ["Build lasting alumni connections", "Support the school and charitable initiatives", "Create professional and social opportunities"] },
       "about-committees": { eyebrow: "Governance", title: "Committees", intro: "Volunteer committees turn the association’s mission into year-round programmes.", items: ["General Committee", "IT Subcommittee", "Annual Dinner Committee", "Membership and Communications"] },
       "about-general-committee": { eyebrow: "2026–2027", title: "General Committee", intro: "Meet the office bearers serving DSOBA.", items: ["President · Edward Lau", "Vice President · Brian Lee", "Honorary Secretary · Alex Chan", "Honorary Treasurer · Daniel Wong"] },
       "about-past-presidents": { eyebrow: "Heritage", title: "Past Presidents", intro: "Recognising the alumni who guided the association through each chapter.", items: ["2024–2026 · Anthony Ho", "2022–2024 · Raymond Lee", "2020–2022 · Michael Chan", "View earlier terms"] },
       "about-past-gencom": { eyebrow: "Archive", title: "Past General Committees", intro: "Previous committee terms and office bearers.", items: ["2024–2026 Committee", "2022–2024 Committee", "2020–2022 Committee"] },
-      "about-cfl": { eyebrow: "Community impact", title: "CFL Trust", intro: "The Charitable Foundation Limited supports education and community initiatives.", items: ["Scholarship support", "Community service", "Donation enquiries"], cta: ["Contact the trust", "contact"] },
+      "about-cfl": { eyebrow: "Community impact", title: "CLF Trust", intro: "The Charitable Foundation Limited supports education and community initiatives.", items: ["Scholarship support", "Community service", "Donation enquiries"], cta: ["Contact the trust", "contact"] },
       "about-booklet": { eyebrow: "Publication", title: "DSOBA booklet", intro: "Association highlights, school stories and alumni milestones.", items: ["Centenary edition", "Annual Dinner booklet", "Association highlights"] },
       "professional-chapters": { eyebrow: "Network", title: "Professional chapters", intro: "Connect through shared expertise and professional interests.", items: ["Legal", "FIBA", "Medical", "ICT & Media", "Design & Built", "TLM", "CARE", "Discipline"] },
       "interest-groups": { eyebrow: "Shared interests", title: "Interest groups", intro: "Groups created around music, sport and alumni-led activities.", items: ["Music Group", "Sports Group", "Suggest a new group"] },
-      "group-music": { eyebrow: "Interest group", title: "Music group", intro: "Rehearsals, performances and gatherings for alumni musicians.", items: ["Summer open rehearsal", "Annual Dinner performance", "Join the group"] },
-      "group-sports": { eyebrow: "Interest group", title: "Sports group", intro: "Dragon boat, family days and friendly competitions.", items: ["Dragon Boat Team", "Games Day", "Poolside gathering"] },
-      "overseas": { eyebrow: "Around the world", title: "Overseas alumni", intro: "Stay connected with alumni living and working overseas.", items: ["United Kingdom", "Canada", "Australia", "United States", "Contact a convenor"] },
+      "group-music": { eyebrow: "Chapter & Group", title: "Music", intro: "Rehearsals, performances and gatherings for alumni musicians.", items: ["Summer open rehearsal", "Annual Dinner performance", "Join the group"] },
+      "group-sports": { eyebrow: "Chapter & Group", title: "Sports", intro: "Dragon boat, family days and friendly competitions.", items: ["Dragon Boat Team", "Games Day", "Poolside gathering"] },
+      "overseas": { eyebrow: "Around the world", title: "Overseas Chapter", intro: "Stay connected with alumni living and working overseas.", items: ["United Kingdom", "Canada", "Australia", "United States", "Contact a convenor"] },
       "news-archive": { eyebrow: "News", title: "News archive", intro: "Browse one year of DSOBA association updates.", items: ["June 2026", "May 2026", "April 2026", "March 2026"] },
       "news-gallery": { eyebrow: "Photos", title: "Community gallery", intro: "Highlights from alumni events, service and sport.", items: ["Charity Service", "Dragon Boat Team", "Happy Hour", "Chapter Dinner"] },
       "events-past": { eyebrow: "Archive", title: "Past events", intro: "Recent event recaps remain available for one year.", items: ["Annual Dinner 2025", "Games Day 2026", "Legal Chapter dinner", "Spring Happy Hour"] },
@@ -718,7 +720,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       "membership-youth": { eyebrow: "Under 18", title: "Youth membership", intro: "An early connection to the Old Boys’ community.", items: ["Association updates", "Youth-to-Trial transition", "Profile and event access"] },
       "membership-enquiry": { eyebrow: "Membership", title: "Membership enquiry", intro: "Send a demo enquiry to the membership team.", items: ["Eligibility question", "Application status", "Member type query"] },
       "membership-credit-card": { eyebrow: "Member benefit", title: "DSOBA Credit Card", intro: "Preview the association credit-card programme.", items: ["Programme highlights", "Eligibility", "Application information"] },
-      "useful-links": { eyebrow: "Information", title: "Useful links", intro: "School and alumni-related resources.", items: ["Dalton School website", "CFL Trust", "Chapter contacts", "Event enquiries"] },
+      "useful-links": { eyebrow: "Information", title: "Useful links", intro: "School and alumni-related resources.", items: ["Dalton School website", "CLF Trust", "Chapter contacts", "Event enquiries"] },
       "contact": { eyebrow: "Get in touch", title: "Contact DSOBA", intro: "Reach the association by email or WhatsApp.", items: ["Email · info@dsoba.example", "WhatsApp · +852 9123 4567", "General enquiries", "Membership support"] },
       "privacy": { eyebrow: "Policy", title: "Privacy policy", intro: "How personal information is handled.", items: ["Information collected", "How information is used", "Retention and security", "Your rights"] },
       "terms": { eyebrow: "Policy", title: "Terms & conditions", intro: "Terms governing the website and member services.", items: ["Website use", "Event registration", "Member responsibilities", "Liability"] },
@@ -728,7 +730,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       { id: "annual-dinner", category: "Annual Dinner", title: "105th Annual Dinner", date: "28 Nov 2026", venue: "Grand Ballroom, Hopewell Hotel", image: "/assets/annual-dinner-venue.jpg", status: "Registration open", description: "The association’s landmark annual gathering brings generations together for dinner, performances and community giving.", highlights: ["Individual seats and tables", "Guest registration welcome", "Charity service showcase"] },
       { id: "dragonboat-award", category: "Sports", title: "Dragon Boat Team Award Celebration", date: "18 Jul 2026", venue: "DSOBA Clubhouse", image: "/assets/dragonboat-award.jpeg", status: "Members welcome", description: "Celebrate the DSOBA Dragon Boat Team after a brilliant competition result and a season built on teamwork.", highlights: ["Team award presentation", "Season photo gallery", "Meet the paddlers"] },
       { id: "happy-hour", category: "Social", title: "Summer Alumni Happy Hour", date: "07 Aug 2026", venue: "Central, Hong Kong", image: "/assets/happy-hour-event.jpeg", status: "RSVP open", description: "A relaxed monthly gathering for alumni across years and professions.", highlights: ["Informal networking", "First drink included", "Members and guests"] },
-      { id: "chapter-dinner", category: "Chapters", title: "Professional Chapters Dinner", date: "12 Sep 2026", venue: "The Mira Hong Kong", image: "/assets/chapter-dinner-event.jpeg", status: "Limited seats", description: "An evening connecting members from Legal, FIBA, Medical, ICT & Media and Design & Built chapters.", highlights: ["Cross-chapter tables", "Guest speaker", "Mentoring introductions"] },
+      { id: "chapter-dinner", category: "Chapters", title: "Professional Chapter Dinner", date: "12 Sep 2026", venue: "The Mira Hong Kong", image: "/assets/chapter-dinner-event.jpeg", status: "Limited seats", description: "An evening connecting members from Legal, FIBA, Medical, ICT & Media and Design & Built chapters.", highlights: ["Cross-chapter tables", "Guest speaker", "Mentoring introductions"] },
       { id: "charity-service", category: "Community", title: "DSOBA Charity Service Day", date: "24 Oct 2026", venue: "Kowloon Community Centre", image: "/assets/charity-service-event.jpeg", status: "Volunteer places open", description: "Alumni and families volunteer together in a practical community service programme featured in the Annual Dinner community report.", highlights: ["Family-friendly service", "Volunteer briefing", "Annual Dinner recognition"] }
     ];
     const eventCategories = ["All", "Annual Dinner", "Sports", "Social", "Chapters", "Community"];
@@ -736,6 +738,31 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     const activeEvent = computed(() => eventsData.find((e) => e.id === selectedEvent.value) || eventsData[0]);
     const people = [["Alex Chan", "Finance", "2004"], ["Brian Lee", "Legal", "1999"], ["Cyrus Ho", "Technology", "2008"], ["Daniel Wong", "Finance", "1994"], ["Eddie Lau", "Design", "2007"], ["Felix Ng", "Medical", "2001"]];
     const shown = computed(() => filter.value === "All" ? people : people.filter((p) => p[1] === filter.value));
+    const memberProfiles = {
+      life: { name: "Edward Lau", initials: "EL", type: "Life Member", status: "Active", classYear: "2007", industry: "Design & Built", email: "edward.lau@example.com", mobile: "+852 9123 4567", badge: "LIFE", badgeNote: "Lifetime alumni access", accent: "bg-navy text-white", seal: "bg-gold text-black", due: "Valid for life" },
+      trial: { name: "Brian Lee", initials: "BL", type: "Trial Member", status: "Active", classYear: "2019", industry: "Legal", email: "brian.lee@example.com", mobile: "+852 9234 5678", badge: "TRIAL", badgeNote: "Convert before age 28", accent: "bg-white text-navy", seal: "bg-wine text-white", due: "Review in 74 days" },
+      youth: { name: "Chris Wong", initials: "CW", type: "Youth Member", status: "Active", classYear: "2026", industry: "Student", email: "chris.wong@example.com", mobile: "+852 9345 6789", badge: "YOUTH", badgeNote: "School-to-alumni pathway", accent: "bg-gold text-black", seal: "bg-navy text-white", due: "Trial upgrade in 2027" },
+      suspended: { name: "Alex Chan", initials: "AC", type: "Life Member", status: "Payment overdue", classYear: "2004", industry: "Finance", email: "alex.chan@example.com", mobile: "+852 9456 7890", badge: "HOLD", badgeNote: "Access paused", accent: "bg-wine text-white", seal: "bg-white text-wine", due: "Payment required" }
+    };
+    const memberProfile = computed(() => memberProfiles[member.value] || memberProfiles.life);
+    const memberStats = computed(() => member.value === "youth" ? { directory: "92", events: "2", messages: "4" } : member.value === "trial" ? { directory: "186", events: "3", messages: "5" } : { directory: "248", events: "4", messages: "7" });
+    const transactions = [
+      { date: "18 Jun 2026", title: "Annual Dinner 2026 seat reservation", method: "Visa **** 1026", amount: "HK$1,860", status: "Paid" },
+      { date: "07 Jun 2026", title: "Summer Alumni Happy Hour", method: "FPS", amount: "HK$280", status: "Paid" },
+      { date: "22 May 2026", title: "Dragon Boat Team celebration", method: "Member wallet", amount: "HK$0", status: "Registered" },
+      { date: "10 Apr 2026", title: "Life membership contribution", method: "Bank transfer", amount: "HK$5,000", status: "Settled" }
+    ];
+    const joinedEvents = [
+      { title: "Gusai Party", date: "16 Aug 2026", status: "Reminder set", note: "Subscribed from Social Activities" },
+      { title: "105th Annual Dinner", date: "28 Nov 2026", status: "Seat reserved", note: "Payment receipt available" },
+      { title: "Dragon Boat Award Celebration", date: "18 Jul 2026", status: "Joined", note: "Photo album will be shared after event" }
+    ];
+    const subscriptions = ref([
+      { name: "DSOBA News", desc: "Association notices and president updates", on: true },
+      { name: "Events & Annual Dinner", desc: "Registration reminders and table updates", on: true },
+      { name: "Sports and Dragon Boat", desc: "Team news, training and results", on: member.value !== "youth" },
+      { name: "Youth Pathway", desc: "School-to-alumni programme reminders", on: member.value === "youth" }
+    ]);
     const portal = computed(() => route.value.startsWith("portal"));
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<main${ssrRenderAttrs(mergeProps({ class: "shell relative overflow-hidden" }, _attrs))}><header class="sticky top-0 z-20 flex h-[66px] items-center justify-between bg-navy px-4 text-white"><button class="flex items-center gap-2"><img${ssrRenderAttr("src", _imports_0)} class="h-12 w-11 object-contain" alt="DSOBA crest"></button><span class="text-xs font-bold">${ssrInterpolate(unref(portal) ? "Member Portal" : "Mobile Demo")}</span><button class="text-2xl">☰</button></header>`);
@@ -743,7 +770,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
         _push(`<aside class="fixed right-0 top-0 z-30 flex h-full w-[82%] max-w-[350px] flex-col bg-white p-6 shadow-2xl"><button class="ml-auto text-2xl">×</button><h2 class="serif mt-5 text-3xl text-navy">${ssrInterpolate(unref(portal) ? "Member menu" : "Explore DSOBA")}</h2><nav class="mt-6 overflow-y-auto pr-1">`);
         if (unref(portal)) {
           _push(`<!--[-->`);
-          ssrRenderList([["Dashboard", "portal-home"], ["Profile", "portal-profile"], ["Directory", "portal-directory"], ["Membership", "portal-membership"], ["Messages", "portal-messages"]], (x) => {
+          ssrRenderList([["Dashboard", "portal-home"], ["Profile", "portal-profile"], ["Directory", "portal-directory"], ["My Events", "portal-events"], ["Transactions", "portal-transactions"], ["Subscriptions", "portal-subscriptions"], ["Membership", "portal-membership"], ["Messages", "portal-messages"]], (x) => {
             _push(`<button class="flex w-full justify-between border-b border-navy/10 py-4 text-left font-bold text-navy">${ssrInterpolate(x[0])} <span>›</span></button>`);
           });
           _push(`<!--]-->`);
@@ -785,11 +812,25 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
         });
         _push(`<!--]--></div></section><section class="relative overflow-hidden bg-navy px-5 py-10 text-white"><img${ssrRenderAttr("src", _imports_3)} class="absolute inset-0 h-full w-full object-cover opacity-20"><div class="relative"><p class="text-[11px] font-bold tracking-[.18em] text-gold">MEMBERSHIP</p><h2 class="serif mt-2 max-w-xs text-4xl leading-tight">Your school years end. The community doesn’t.</h2><p class="mt-4 max-w-xs text-sm leading-6 text-white/70">Stay connected through events, chapters, member services and the alumni directory.</p><button class="mt-6 rounded-xl bg-gold px-5 py-3 font-bold text-black">Explore membership</button></div></section></section>`);
       } else if (unref(route) === "about" || unref(route) === "chapters") {
-        _push(`<section class="p-5 py-8"><p class="text-xs font-bold tracking-wider text-wine">${ssrInterpolate(unref(route) === "about" ? "ABOUT DSOBA" : "COMMUNITY")}</p><h1 class="serif mt-3 text-4xl text-navy">${ssrInterpolate(unref(route) === "about" ? "A community with a generous memory." : "Chapters & groups")}</h1><p class="mt-5 leading-7 text-navy/70">DSOBA connects alumni across classes, professions and countries—creating room to contribute and reconnect.</p><div class="mt-6 bg-white p-4"><!--[-->`);
-        ssrRenderList(unref(route) === "about" ? ["Our mission", "General Committee", "Past Presidents", "CFL Trust"] : ["Legal", "FIBA", "Medical", "ICT & Media", "Design & Built", "Music", "Sports"], (x) => {
-          _push(`<button class="flex w-full justify-between border-b border-navy/10 py-4 font-bold text-navy">${ssrInterpolate(x)} <span>›</span></button>`);
-        });
-        _push(`<!--]--></div></section>`);
+        _push(`<section class="p-5 py-8">`);
+        if (unref(route) === "about") {
+          _push(`<!--[--><p class="text-xs font-bold tracking-wider text-wine">ABOUT DSOBA</p><h1 class="serif mt-3 text-4xl text-navy">About DSOBA</h1><p class="mt-5 leading-7 text-navy/70">A single overview for the association story, mission, current committee, past presidents and CLF Trust.</p><div class="mt-6 space-y-4"><article class="rounded-2xl bg-white p-4"><small class="font-bold uppercase tracking-wider text-wine">Our Mission</small><h2 class="serif mt-1 text-2xl text-navy">Connect, serve and support.</h2><p class="mt-2 text-sm leading-6 text-navy/65">Connect Old Boys across generations, strengthen fellowship and support the school community.</p></article><article class="rounded-2xl bg-white p-4"><small class="font-bold uppercase tracking-wider text-wine">General Committee</small><!--[-->`);
+          ssrRenderList(["President · Edward Lau", "Vice President · Brian Lee", "Honorary Secretary · Alex Chan", "Honorary Treasurer · Daniel Wong"], (x) => {
+            _push(`<div class="border-b border-navy/10 py-3 text-sm font-bold text-navy">${ssrInterpolate(x)}</div>`);
+          });
+          _push(`<!--]--></article><article class="rounded-2xl bg-white p-4"><small class="font-bold uppercase tracking-wider text-wine">Past Presidents</small><!--[-->`);
+          ssrRenderList(["2024–2026 · Anthony Ho", "2022–2024 · Raymond Lee", "2020–2022 · Michael Chan", "Earlier terms archive"], (x) => {
+            _push(`<div class="border-b border-navy/10 py-3 text-sm font-bold text-navy">${ssrInterpolate(x)}</div>`);
+          });
+          _push(`<!--]--></article><article class="rounded-2xl bg-wine p-4 text-white"><small class="font-bold uppercase tracking-wider text-gold">CLF Trust</small><h2 class="serif mt-1 text-2xl">Charitable Foundation Limited</h2><p class="mt-2 text-sm leading-6 text-white/70">Scholarship support, community service and donation enquiries sit together with the About DSOBA information.</p></article></div><!--]-->`);
+        } else {
+          _push(`<!--[--><p class="text-xs font-bold tracking-wider text-wine">CHAPTERS &amp; GROUPS</p><h1 class="serif mt-3 text-4xl text-navy">Chapters &amp; groups</h1><p class="mt-5 leading-7 text-navy/70">Music and Sports are top-level groups, followed by Professional Chapter and Overseas Chapter.</p><div class="mt-6 bg-white p-4"><!--[-->`);
+          ssrRenderList([["Music", "group-music"], ["Sports", "group-sports"], ["Chapters", "chapters"]], (x) => {
+            _push(`<button class="flex w-full justify-between border-b border-navy/10 py-4 font-bold text-navy">${ssrInterpolate(x[0])} <span>›</span></button>`);
+          });
+          _push(`<!--]--></div><!--]-->`);
+        }
+        _push(`</section>`);
       } else if (unref(route) === "news" || unref(route) === "news-detail") {
         _push(`<section class="p-5 py-8">`);
         if (unref(route) === "news") {
@@ -879,19 +920,35 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
         }
         _push(`</section>`);
       } else if (unref(route) === "login" || unref(route) === "claim") {
-        _push(`<section class="p-5 py-10"><p class="text-xs font-bold text-wine">MEMBER ACCESS</p><h1 class="serif mt-3 text-4xl text-navy">${ssrInterpolate(unref(route) === "login" ? "Welcome back." : "Claim your account.")}</h1>`);
+        _push(`<section class="p-5 py-10"><p class="text-xs font-bold text-wine">MEMBER ACCESS</p><h1 class="serif mt-3 text-4xl text-navy">${ssrInterpolate(unref(route) === "login" ? "Choose a demo member." : "Claim your account.")}</h1>`);
         if (unref(route) === "login") {
-          _push(`<div class="mt-7 space-y-3"><button class="w-full rounded-xl bg-navy p-4 text-left text-white"><b>Edward Lau · Life member</b><small class="block text-white/60">Active member experience</small></button><button class="w-full rounded-xl bg-white p-4 text-left"><b>Brian Lee · Trial member</b></button><button class="w-full rounded-xl bg-wine p-4 text-left text-white"><b>Alex Chan · Suspended member</b><small class="block text-white/60">Payment recovery experience</small></button><button class="font-bold text-wine underline">Claim legacy account</button></div>`);
+          _push(`<!--[--><p class="mt-3 text-sm leading-6 text-navy/65">Preview how the portal changes by member type, including profile badge, activity reminders, payments and subscribed news.</p><div class="mt-6 grid grid-cols-3 gap-2 rounded-2xl bg-white p-3 text-center"><button class="rounded-xl bg-navy p-3 text-white"><b class="block text-lg">Life</b><small>Full access</small></button><button class="rounded-xl border border-navy/10 p-3 text-navy"><b class="block text-lg">Trial</b><small>Starter</small></button><button class="rounded-xl bg-gold p-3 text-black"><b class="block text-lg">Youth</b><small>Pathway</small></button></div><div class="mt-5 space-y-3"><!--[-->`);
+          ssrRenderList(["life", "trial", "youth", "suspended"], (key) => {
+            _push(`<button class="flex w-full items-center gap-4 rounded-2xl border border-navy/10 bg-white p-4 text-left shadow-sm"><span class="${ssrRenderClass([memberProfiles[key].seal, "grid h-14 w-14 shrink-0 place-items-center rounded-full text-sm font-black"])}">${ssrInterpolate(memberProfiles[key].badge)}</span><span class="min-w-0 flex-1"><b class="block text-navy">${ssrInterpolate(memberProfiles[key].name)}</b><small class="block text-navy/55">${ssrInterpolate(memberProfiles[key].type)} · Class of ${ssrInterpolate(memberProfiles[key].classYear)}</small></span><span class="text-wine">›</span></button>`);
+          });
+          _push(`<!--]--><button class="font-bold text-wine underline">Claim legacy account</button></div><!--]-->`);
         } else {
           _push(`<div class="mt-6"><input class="w-full rounded-xl border p-3" placeholder="Email"><input class="mt-3 w-full rounded-xl border p-3" placeholder="One-time access code"><button class="mt-5 w-full rounded-xl bg-gold py-3 font-bold">Claim account</button></div>`);
         }
         _push(`</section>`);
       } else if (unref(route) === "portal-suspended") {
-        _push(`<section class="p-5 py-9"><p class="text-xs font-bold text-wine">ACCOUNT RESTRICTED</p><h1 class="serif mt-3 text-4xl text-navy">Let’s restore your membership.</h1><div class="mt-6 rounded-2xl bg-wine p-5 text-white"><b>Life membership payment is overdue.</b><p class="mt-2 text-sm text-white/70">Directory and member event access are paused.</p></div><button class="mt-5 w-full rounded-xl bg-gold py-3 font-bold">Review payment reminder</button></section>`);
+        _push(`<section class="p-5 py-9"><p class="text-xs font-bold text-wine">ACCOUNT RESTRICTED</p><h1 class="serif mt-3 text-4xl text-navy">Let’s restore your membership.</h1><div class="mt-6 rounded-2xl bg-wine p-5 text-white"><div class="flex items-center gap-4"><b class="grid h-16 w-16 place-items-center rounded-full bg-white text-wine">${ssrInterpolate(unref(memberProfile).initials)}</b><span><b>${ssrInterpolate(unref(memberProfile).name)}</b><small class="block text-white/65">${ssrInterpolate(unref(memberProfile).badgeNote)}</small></span></div><p class="mt-4 text-sm text-white/70">Directory, event booking and member news access are paused until the payment reminder is cleared.</p></div><button class="mt-5 w-full rounded-xl bg-gold py-3 font-bold">Review payment reminder</button></section>`);
       } else if (unref(route) === "portal-home") {
-        _push(`<section class="p-5 py-8"><p class="text-xs font-bold text-wine">MEMBER HOME</p><h1 class="serif mt-2 text-4xl text-navy">Hi, ${ssrInterpolate(unref(member) === "trial" ? "Brian" : "Edward")}.</h1><div class="mt-5 rounded-2xl bg-navy p-5 text-white"><b class="text-gold">${ssrInterpolate(unref(member) === "trial" ? "TRIAL" : "ACTIVE")}</b><h2 class="serif text-3xl">${ssrInterpolate(unref(member) === "trial" ? "Trial member" : "Life member")}</h2></div><div class="mt-4 grid grid-cols-2 gap-3"><button class="rounded-xl bg-white p-4 text-left"><b class="block text-2xl text-wine">248</b><small>Directory members</small></button><button class="rounded-xl bg-white p-4 text-left"><b class="block text-2xl text-wine">1</b><small>Featured event</small></button></div></section>`);
+        _push(`<section class="p-5 py-8"><p class="text-xs font-bold text-wine">MEMBER HOME</p><h1 class="serif mt-2 text-4xl text-navy">Hi, ${ssrInterpolate(unref(memberProfile).name.split(" ")[0])}.</h1><div class="${ssrRenderClass([unref(memberProfile).accent, "mt-5 overflow-hidden rounded-2xl p-5 shadow-sm"])}"><div class="flex items-start justify-between gap-4"><div><small class="font-bold uppercase opacity-70">${ssrInterpolate(unref(memberProfile).status)}</small><h2 class="serif mt-1 text-3xl leading-tight">${ssrInterpolate(unref(memberProfile).type)}</h2><p class="mt-2 text-sm opacity-70">${ssrInterpolate(unref(memberProfile).badgeNote)}</p></div><b class="${ssrRenderClass([unref(memberProfile).seal, "grid h-20 w-20 shrink-0 place-items-center rounded-full text-lg font-black shadow"])}">${ssrInterpolate(unref(memberProfile).badge)}</b></div><div class="mt-5 grid grid-cols-2 gap-3 text-sm"><span><b class="block">Class of ${ssrInterpolate(unref(memberProfile).classYear)}</b><small class="opacity-70">${ssrInterpolate(unref(memberProfile).industry)}</small></span><span><b class="block">${ssrInterpolate(unref(memberProfile).due)}</b><small class="opacity-70">Membership status</small></span></div></div><div class="mt-4 grid grid-cols-3 gap-2"><button class="rounded-xl bg-white p-3 text-left"><b class="block text-2xl text-wine">${ssrInterpolate(unref(memberStats).directory)}</b><small>Directory</small></button><button class="rounded-xl bg-white p-3 text-left"><b class="block text-2xl text-wine">${ssrInterpolate(unref(memberStats).events)}</b><small>Events</small></button><button class="rounded-xl bg-white p-3 text-left"><b class="block text-2xl text-wine">${ssrInterpolate(unref(memberStats).messages)}</b><small>Messages</small></button></div><section class="mt-6"><div class="flex items-center justify-between"><h2 class="serif text-2xl text-navy">Reminders</h2><button class="text-xs font-bold text-wine">All events →</button></div><!--[-->`);
+        ssrRenderList(joinedEvents.slice(0, 2), (event) => {
+          _push(`<article class="mt-3 rounded-2xl bg-white p-4"><small class="font-bold text-wine">${ssrInterpolate(event.date)} · ${ssrInterpolate(event.status)}</small><b class="mt-1 block text-navy">${ssrInterpolate(event.title)}</b><p class="mt-1 text-sm text-navy/60">${ssrInterpolate(event.note)}</p></article>`);
+        });
+        _push(`<!--]--></section><section class="mt-6"><div class="flex items-center justify-between"><h2 class="serif text-2xl text-navy">Recent transactions</h2><button class="text-xs font-bold text-wine">View all →</button></div><!--[-->`);
+        ssrRenderList(transactions.slice(0, 3), (t) => {
+          _push(`<article class="mt-3 flex items-center justify-between gap-3 rounded-xl bg-white p-4"><span><b class="block text-sm text-navy">${ssrInterpolate(t.title)}</b><small class="text-navy/50">${ssrInterpolate(t.date)} · ${ssrInterpolate(t.status)}</small></span><b class="text-sm text-wine">${ssrInterpolate(t.amount)}</b></article>`);
+        });
+        _push(`<!--]--></section><section class="mt-6 rounded-2xl bg-navy p-4 text-white"><small class="font-bold text-gold">SUBSCRIBED NEWS</small><div class="mt-3 grid grid-cols-2 gap-2"><!--[-->`);
+        ssrRenderList(unref(subscriptions).filter((s) => s.on).slice(0, 4), (s) => {
+          _push(`<span class="rounded-lg border border-white/15 p-3 text-xs">${ssrInterpolate(s.name)}</span>`);
+        });
+        _push(`<!--]--></div></section></section>`);
       } else if (unref(route) === "portal-profile") {
-        _push(`<section class="p-5 py-8"><h1 class="serif text-4xl text-navy">My profile</h1><div class="mt-5 flex items-center gap-4"><b class="grid h-16 w-16 place-items-center rounded-full bg-gold">EL</b><span>Edward Lau<small class="block">Class of 2007</small></span></div><!--[-->`);
+        _push(`<section class="p-5 py-8"><h1 class="serif text-4xl text-navy">My profile</h1><div class="mt-5 rounded-2xl bg-white p-5"><div class="flex items-center gap-4"><b class="${ssrRenderClass([unref(memberProfile).seal, "grid h-16 w-16 place-items-center rounded-full"])}">${ssrInterpolate(unref(memberProfile).initials)}</b><span><b>${ssrInterpolate(unref(memberProfile).name)}</b><small class="block">${ssrInterpolate(unref(memberProfile).type)} · Class of ${ssrInterpolate(unref(memberProfile).classYear)}</small><small class="block text-wine">${ssrInterpolate(unref(memberProfile).status)}</small></span></div><div class="mt-5 grid grid-cols-2 gap-3 text-sm"><span><small class="text-navy/45">Email</small><b class="block break-all">${ssrInterpolate(unref(memberProfile).email)}</b></span><span><small class="text-navy/45">Mobile</small><b class="block">${ssrInterpolate(unref(memberProfile).mobile)}</b></span><span><small class="text-navy/45">Industry</small><b class="block">${ssrInterpolate(unref(memberProfile).industry)}</b></span><span><small class="text-navy/45">Badge</small><b class="block">${ssrInterpolate(unref(memberProfile).badge)}</b></span></div></div><!--[-->`);
         ssrRenderList(["Email", "Mobile", "Industry", "Company"], (x) => {
           _push(`<input class="mt-3 w-full rounded-xl border p-3"${ssrRenderAttr("placeholder", x)}>`);
         });
@@ -906,8 +963,26 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
           _push(`<button class="mt-3 flex w-full justify-between rounded-xl bg-white p-4 text-left"><span><b>${ssrInterpolate(p[0])}</b><small class="block">${ssrInterpolate(p[1])} · ${ssrInterpolate(p[2])}</small></span><span>›</span></button>`);
         });
         _push(`<!--]--></section>`);
+      } else if (unref(route) === "portal-events") {
+        _push(`<section class="p-5 py-8"><h1 class="serif text-4xl text-navy">My events</h1><p class="mt-3 text-sm leading-6 text-navy/60">Joined activities, saved reminders and member-only event prompts.</p><!--[-->`);
+        ssrRenderList(joinedEvents, (event) => {
+          _push(`<article class="mt-4 rounded-2xl bg-white p-4"><small class="font-bold text-wine">${ssrInterpolate(event.date)} · ${ssrInterpolate(event.status)}</small><b class="mt-1 block text-xl text-navy">${ssrInterpolate(event.title)}</b><p class="mt-2 text-sm text-navy/60">${ssrInterpolate(event.note)}</p><button class="mt-4 rounded-lg bg-gold px-4 py-2 text-xs font-bold">Update reminder</button></article>`);
+        });
+        _push(`<!--]--></section>`);
+      } else if (unref(route) === "portal-transactions") {
+        _push(`<section class="p-5 py-8"><h1 class="serif text-4xl text-navy">Transaction history</h1><p class="mt-3 text-sm text-navy/60">Receipts, event payments and membership records for the member account.</p><!--[-->`);
+        ssrRenderList(transactions, (t) => {
+          _push(`<article class="mt-4 rounded-2xl bg-white p-4"><div class="flex items-start justify-between gap-3"><span><small class="font-bold text-wine">${ssrInterpolate(t.date)} · ${ssrInterpolate(t.status)}</small><b class="mt-1 block text-navy">${ssrInterpolate(t.title)}</b><small class="text-navy/50">${ssrInterpolate(t.method)}</small></span><b class="text-wine">${ssrInterpolate(t.amount)}</b></div></article>`);
+        });
+        _push(`<!--]--></section>`);
+      } else if (unref(route) === "portal-subscriptions") {
+        _push(`<section class="p-5 py-8"><h1 class="serif text-4xl text-navy">News subscriptions</h1><p class="mt-3 text-sm text-navy/60">Member can control which notices, events and group updates they receive.</p><!--[-->`);
+        ssrRenderList(unref(subscriptions), (s) => {
+          _push(`<article class="mt-4 flex items-center justify-between gap-4 rounded-2xl bg-white p-4"><span><b class="block text-navy">${ssrInterpolate(s.name)}</b><small class="text-navy/55">${ssrInterpolate(s.desc)}</small></span><button class="${ssrRenderClass([s.on ? "bg-gold" : "bg-navy/15", "h-8 w-14 rounded-full p-1"])}"><span class="${ssrRenderClass([s.on ? "ml-6" : "ml-0", "block h-6 w-6 rounded-full bg-white shadow transition"])}"></span></button></article>`);
+        });
+        _push(`<!--]--></section>`);
       } else if (unref(route) === "portal-membership") {
-        _push(`<section class="p-5 py-8"><h1 class="serif text-4xl text-navy">${ssrInterpolate(unref(member) === "suspended" ? "Payment recovery" : "Your membership")}</h1><div class="mt-6 rounded-xl bg-white p-5"><b>${ssrInterpolate(unref(member) === "suspended" ? "Life payment overdue" : "Membership active")}</b><p class="mt-2 text-sm">${ssrInterpolate(unref(member) === "suspended" ? "Access returns immediately after demo payment." : "Your record is up to date.")}</p></div>`);
+        _push(`<section class="p-5 py-8"><h1 class="serif text-4xl text-navy">${ssrInterpolate(unref(member) === "suspended" ? "Payment recovery" : "Your membership")}</h1><div class="mt-6 rounded-2xl bg-white p-5"><div class="flex items-center gap-4"><b class="${ssrRenderClass([unref(memberProfile).seal, "grid h-16 w-16 place-items-center rounded-full"])}">${ssrInterpolate(unref(memberProfile).badge)}</b><span><b>${ssrInterpolate(unref(memberProfile).type)}</b><p class="mt-1 text-sm text-navy/60">${ssrInterpolate(unref(member) === "suspended" ? "Access returns immediately after demo payment." : unref(memberProfile).due)}</p></span></div></div>`);
         if (unref(member) === "suspended") {
           _push(`<button class="mt-5 w-full rounded-xl bg-gold py-3 font-bold">Complete demo payment</button>`);
         } else {
@@ -916,22 +991,22 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
         _push(`</section>`);
       } else {
         _push(`<section class="p-5 py-8"><h1 class="serif text-4xl text-navy">Message history</h1><!--[-->`);
-        ssrRenderList(["Annual Dinner registration received", "Profile updated", "Life membership reminder"], (x) => {
+        ssrRenderList(["Gusai Party reminder set", "Annual Dinner registration received", "Profile updated", "Life membership receipt issued"], (x) => {
           _push(`<article class="mt-4 rounded-xl bg-white p-4"><small class="font-bold text-wine">EMAIL + WHATSAPP</small><b class="block">${ssrInterpolate(x)}</b></article>`);
         });
         _push(`<!--]--></section>`);
       }
       if (!unref(portal)) {
         _push(`<footer class="bg-[#07131f] px-5 py-8 text-white"><div class="flex items-center gap-3"><img${ssrRenderAttr("src", _imports_0)} class="h-14 w-12 object-contain"><div><b class="serif text-2xl">DSOBA</b><small class="block text-white/50">Dalton School Old Boys’ Association</small></div></div><p class="mt-5 text-sm leading-6 text-white/60">Connecting alumni across generations, professions and places.</p><div class="mt-7 grid grid-cols-2 gap-x-5"><div><b class="text-xs tracking-wider text-gold">EXPLORE</b><!--[-->`);
-        ssrRenderList([["Home", "home"], ["About DSOBA", "about"], ["Mission", "about"], ["Committees", "about"], ["Chapters & Groups", "chapters"]], (x) => {
+        ssrRenderList([["Home", "home"], ["About DSOBA", "about"], ["Our Mission", "about-mission"], ["General Committee", "about-general-committee"], ["Past Presidents", "about-past-presidents"], ["CLF Trust", "about-cfl"], ["Music", "group-music"], ["Sports", "group-sports"], ["Chapters", "chapters"]], (x) => {
           _push(`<button class="block py-2 text-left text-sm text-white/75">${ssrInterpolate(x[0])}</button>`);
         });
         _push(`<!--]--></div><div><b class="text-xs tracking-wider text-gold">DISCOVER</b><!--[-->`);
-        ssrRenderList([["DSOBA News", "news"], ["Upcoming Events", "events"], ["Past Events", "events"], ["Annual Dinner", "event-detail"], ["Membership", "membership"]], (x) => {
+        ssrRenderList([["News", "news"], ["Upcoming Events", "events"], ["Past Events", "events"], ["Annual Dinner", "event-detail"], ["Membership", "membership"]], (x) => {
           _push(`<button class="block py-2 text-left text-sm text-white/75">${ssrInterpolate(x[0])}</button>`);
         });
         _push(`<!--]--></div><div class="mt-5"><b class="text-xs tracking-wider text-gold">MEMBERSHIP</b><!--[-->`);
-        ssrRenderList([["Why Join", "membership"], ["Life / Trial / Youth", "membership-types"], ["Apply Now", "membership-apply"], ["Enquiry", "membership"], ["DSOBA Credit Card", "membership"]], (x) => {
+        ssrRenderList([["Why Join", "membership"], ["Life / Trial / Youth", "membership-types"], ["Apply Now", "membership-apply"], ["Enquiry", "membership-enquiry"], ["DSOBA Credit Card", "membership-credit-card"]], (x) => {
           _push(`<button class="block py-2 text-left text-sm text-white/75">${ssrInterpolate(x[0])}</button>`);
         });
         _push(`<!--]--></div><div class="mt-5"><b class="text-xs tracking-wider text-gold">MEMBER SERVICES</b><button class="block py-2 text-left text-sm text-white/75">Member login</button><button class="block py-2 text-left text-sm text-white/75">Claim account</button><button class="block py-2 text-left text-sm text-white/75">Alumni directory</button><button class="block py-2 text-left text-sm text-white/75">Contact / WhatsApp</button></div></div><div class="mt-7 border-t border-white/10 pt-5"><div class="flex flex-wrap gap-x-4 gap-y-2 text-xs text-white/45"><button>Useful Links</button><button>Privacy Policy</button><button>Terms &amp; Conditions</button><button>Personal Data</button></div><p class="mt-5 text-[11px] text-white/35">© 2026 DSOBA · Mobile stakeholder demo</p></div></footer>`);

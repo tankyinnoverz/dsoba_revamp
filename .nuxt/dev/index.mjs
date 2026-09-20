@@ -3,7 +3,7 @@ import { Server } from 'node:http';
 import { resolve, dirname, join } from 'node:path';
 import nodeCrypto from 'node:crypto';
 import { parentPort, threadId } from 'node:worker_threads';
-import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, createError, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, appendResponseHeader, getRequestURL, getResponseHeader, removeResponseHeader, getQuery as getQuery$1, readBody, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getResponseStatus, getRouterParam, getResponseStatusText } from 'file://C:/local-server/dsoba-mobile-demo/node_modules/h3/dist/index.mjs';
+import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, createError, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, appendResponseHeader, getRequestURL, getResponseHeader, removeResponseHeader, getQuery as getQuery$1, getRequestWebStream, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getResponseStatus, getRouterParam, readBody, getResponseStatusText } from 'file://C:/local-server/dsoba-mobile-demo/node_modules/h3/dist/index.mjs';
 import { escapeHtml } from 'file://C:/local-server/dsoba-mobile-demo/node_modules/@vue/shared/dist/shared.cjs.js';
 import viteNodeEntry_mjs from 'file://C:/local-server/dsoba-mobile-demo/node_modules/@nuxt/vite-builder/dist/vite-node-entry.mjs';
 import { viteNodeFetch } from 'file://C:/local-server/dsoba-mobile-demo/node_modules/@nuxt/vite-builder/dist/vite-node.mjs';
@@ -33,7 +33,7 @@ import { Youch } from 'file://C:/local-server/dsoba-mobile-demo/node_modules/you
 import { SourceMapConsumer } from 'file://C:/local-server/dsoba-mobile-demo/node_modules/source-map/source-map.js';
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { getContext } from 'file://C:/local-server/dsoba-mobile-demo/node_modules/unctx/dist/index.mjs';
-import { captureRawStackTrace, parseRawStackTrace } from 'file://C:/local-server/dsoba-mobile-demo/node_modules/errx/dist/index.js';
+import { captureRawStackTrace, parseRawStackTrace } from 'file://C:/local-server/dsoba-mobile-demo/node_modules/errx/dist/index.mjs';
 import _wH6JrtIxmaSoA8lCPWFnE9z4lQeXW6H5z3l5aymEQw from 'file://C:/local-server/dsoba-mobile-demo/node_modules/@nuxt/vite-builder/dist/fix-stacktrace.mjs';
 import { promises } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -2253,20 +2253,53 @@ function resolveUnrefHeadInput(input) {
   return walkResolver(input, VueResolver);
 }
 
-function filterIslandProps(props) {
-  if (!props) {
-    return {};
+function computeIslandHash(name, serializedProps, context, source) {
+  let parsed;
+  try {
+    parsed = JSON.parse(serializedProps);
+  } catch {
+    parsed = serializedProps;
   }
-  const out = {};
-  for (const key in props) {
-    if (!key.startsWith("data-v-")) {
-      out[key] = props[key];
-    }
-  }
-  return out;
+  return hash$1([name, parsed, context, source]).replace(/[-_]/g, "");
 }
-function computeIslandHash(name, filteredProps, context, source) {
-  return hash$1([name, filteredProps, context, source]).replace(/[-_]/g, "");
+
+const MAX_ISLAND_BODY_BYTES = 64 * 1024;
+
+const MAX_ISLAND_PROP_DEPTH = 64;
+
+function exceedsMaxDepth(raw, maxDepth = MAX_ISLAND_PROP_DEPTH) {
+	let depth = 0;
+	let inString = false;
+	let escaped = false;
+	for (let i = 0; i < raw.length; i++) {
+		const ch = raw[i];
+		if (inString) {
+			if (escaped) {
+				escaped = false;
+			} else if (ch === "\\") {
+				escaped = true;
+			} else if (ch === "\"") {
+				inString = false;
+			}
+			continue;
+		}
+		if (ch === "\"") {
+			inString = true;
+		} else if (ch === "{" || ch === "[") {
+			if (++depth > maxDepth) {
+				return true;
+			}
+		} else if (ch === "}" || ch === "]") {
+			if (depth > 0) {
+				depth--;
+			}
+		}
+	}
+	return false;
+}
+
+function exceedsMaxBytes(raw, maxBytes = MAX_ISLAND_BODY_BYTES) {
+	return Buffer.byteLength(raw, "utf8") > maxBytes;
 }
 
 const NUXT_RUNTIME_PAYLOAD_EXTRACTION = false;
@@ -2460,7 +2493,17 @@ function getClientIslandResponse(ssrContext) {
 	const response = {};
 	for (const [clientUid, component] of Object.entries(ssrContext.islandContext.components)) {
 		
-		const html = ssrContext.teleports?.[clientUid]?.replaceAll("<!--teleport start anchor-->", "") || "";
+		let html = ssrContext.teleports?.[clientUid]?.replaceAll("<!--teleport start anchor-->", "") || "";
+		
+		if (!html && ssrContext.teleports) {
+			for (const [key, value] of Object.entries(ssrContext.teleports)) {
+				const [, , componentUid] = key.match(SSR_CLIENT_TELEPORT_MARKER) ?? [];
+				if (componentUid === clientUid) {
+					html = value.replaceAll("<!--teleport start anchor-->", "");
+					break;
+				}
+			}
+		}
 		response[clientUid] = {
 			...component,
 			html,
@@ -2517,11 +2560,19 @@ function replaceIslandTeleports(ssrContext, html) {
 
 const ISLAND_SUFFIX_RE = /\.json(?:\?.*)?$/;
 const handler$1 = defineEventHandler(async (event) => {
-	const nitroApp = useNitroApp();
 	setResponseHeaders(event, {
 		"content-type": "application/json;charset=utf-8",
 		"x-powered-by": "Nuxt"
 	});
+	{
+		return toResponse(event, await renderIsland(event));
+	}
+});
+function toResponse(event, result) {
+	return "raw" in result ? returnIslandResponse(event, result.raw) : result;
+}
+async function renderIsland(event) {
+	const nitroApp = useNitroApp();
 	const islandContext = await getIslandContext(event);
 	const ssrContext = {
 		...createSSRContext(event),
@@ -2552,7 +2603,7 @@ const handler$1 = defineEventHandler(async (event) => {
 				statusMessage: response.statusMessage
 			});
 		}
-		return returnIslandResponse(event, response);
+		return { raw: response };
 	}
 	
 	if (ssrContext.payload?.error) {
@@ -2611,7 +2662,7 @@ const handler$1 = defineEventHandler(async (event) => {
 		islandContext
 	});
 	return islandResponse;
-});
+}
 function returnIslandResponse(event, response) {
 	for (const header in response.headers || {}) {
 		setResponseHeader(event, header, response.headers[header]);
@@ -2623,6 +2674,63 @@ function returnIslandResponse(event, response) {
 }
 const ISLAND_PATH_PREFIX = "/__nuxt_island/";
 const VALID_COMPONENT_NAME_RE = /^[a-z][\w.-]*$/i;
+
+
+async function readGuardedIslandBody(event) {
+	const contentLength = Number(getRequestHeader(event, "content-length"));
+	if (contentLength > MAX_ISLAND_BODY_BYTES) {
+		throw createError({
+			statusCode: 413,
+			statusMessage: "Island request body too large"
+		});
+	}
+	
+	
+	let received = 0;
+	let raw = "";
+	let overflowed = false;
+	const stream = getRequestWebStream(event);
+	if (stream) {
+		const decoder = new TextDecoder();
+		const reader = stream.getReader();
+		try {
+			for (;;) {
+				const { done, value } = await reader.read();
+				if (done) {
+					break;
+				}
+				received += value.byteLength;
+				if (received > MAX_ISLAND_BODY_BYTES) {
+					
+					
+					
+					overflowed = true;
+					continue;
+				}
+				raw += decoder.decode(value, { stream: true });
+			}
+		} finally {
+			reader.releaseLock();
+		}
+		raw += decoder.decode();
+	}
+	if (overflowed) {
+		throw createError({
+			statusCode: 413,
+			statusMessage: "Island request body too large"
+		});
+	}
+	if (!raw) {
+		return {};
+	}
+	if (exceedsMaxDepth(raw)) {
+		throw createError({
+			statusCode: 400,
+			statusMessage: "Island request body too deeply nested"
+		});
+	}
+	return destr$1(raw) || {};
+}
 async function getIslandContext(event) {
 	let url = event.path || "";
 	url.replace(/\?.*$/, "");
@@ -2641,9 +2749,22 @@ async function getIslandContext(event) {
 			statusMessage: "Invalid island component name"
 		});
 	}
-	const rawContext = event.method === "GET" ? getQuery$1(event) : await readBody(event);
-	const rawProps = destr$1(rawContext?.props) || {};
-	const filteredProps = filterIslandProps(rawProps);
+	const rawContext = event.method === "GET" ? getQuery$1(event) : await readGuardedIslandBody(event);
+	const serializedProps = typeof rawContext?.props === "string" ? rawContext.props : "{}";
+	
+	
+	if (exceedsMaxBytes(serializedProps)) {
+		throw createError({
+			statusCode: 413,
+			statusMessage: "Island request props too large"
+		});
+	}
+	if (exceedsMaxDepth(serializedProps)) {
+		throw createError({
+			statusCode: 400,
+			statusMessage: "Island request props too deeply nested"
+		});
+	}
 	
 	
 	const clientContext = {};
@@ -2654,9 +2775,17 @@ async function getIslandContext(event) {
 			}
 		}
 	}
+	const parsed = destr$1(serializedProps);
+	if (parsed === null || typeof parsed !== "object" || Array.isArray(parsed)) {
+		throw createError({
+			statusCode: 400,
+			statusMessage: "Invalid island request props"
+		});
+	}
+	const parsedProps = parsed;
 	
 	
-	const expectedHash = computeIslandHash(componentName, filteredProps, clientContext, undefined);
+	const expectedHash = computeIslandHash(componentName, serializedProps, clientContext, undefined);
 	if (!hashId || hashId !== expectedHash) {
 		throw createError({
 			statusCode: 400,
@@ -2667,7 +2796,7 @@ async function getIslandContext(event) {
 		url: typeof rawContext?.url === "string" ? rawContext.url : "/",
 		id: hashId,
 		name: componentName,
-		props: rawProps,
+		props: parsedProps,
 		slots: {},
 		components: {}
 	};
@@ -2997,7 +3126,7 @@ const template$1 = (messages) => {
 		..._messages,
 		...messages
 	};
-	return "<!DOCTYPE html><html lang=\"en\"><head><title>" + escapeHtml(messages.status) + " - " + escapeHtml(messages.statusText) + " | " + escapeHtml(messages.appName) + "</title><meta charset=\"utf-8\"><meta content=\"width=device-width,initial-scale=1.0,minimum-scale=1.0\" name=\"viewport\"><style>.spotlight{background:linear-gradient(45deg,#00dc82,#36e4da 50%,#0047e1);filter:blur(20vh)}*,:after,:before{border-color:var(--un-default-border-color,#e5e7eb);border-style:solid;border-width:0;box-sizing:border-box}:after,:before{--un-content:\"\"}html{line-height:1.5;-webkit-text-size-adjust:100%;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-moz-tab-size:4;tab-size:4;-webkit-tap-highlight-color:transparent}body{line-height:inherit;margin:0}h1{font-size:inherit;font-weight:inherit}h1,p{margin:0}*,:after,:before{--un-rotate:0;--un-rotate-x:0;--un-rotate-y:0;--un-rotate-z:0;--un-scale-x:1;--un-scale-y:1;--un-scale-z:1;--un-skew-x:0;--un-skew-y:0;--un-translate-x:0;--un-translate-y:0;--un-translate-z:0;--un-pan-x: ;--un-pan-y: ;--un-pinch-zoom: ;--un-scroll-snap-strictness:proximity;--un-ordinal: ;--un-slashed-zero: ;--un-numeric-figure: ;--un-numeric-spacing: ;--un-numeric-fraction: ;--un-border-spacing-x:0;--un-border-spacing-y:0;--un-ring-offset-shadow:0 0 transparent;--un-ring-shadow:0 0 transparent;--un-shadow-inset: ;--un-shadow:0 0 transparent;--un-ring-inset: ;--un-ring-offset-width:0px;--un-ring-offset-color:#fff;--un-ring-width:0px;--un-ring-color:rgba(147,197,253,.5);--un-blur: ;--un-brightness: ;--un-contrast: ;--un-drop-shadow: ;--un-grayscale: ;--un-hue-rotate: ;--un-invert: ;--un-saturate: ;--un-sepia: ;--un-backdrop-blur: ;--un-backdrop-brightness: ;--un-backdrop-contrast: ;--un-backdrop-grayscale: ;--un-backdrop-hue-rotate: ;--un-backdrop-invert: ;--un-backdrop-opacity: ;--un-backdrop-saturate: ;--un-backdrop-sepia: }.fixed{position:fixed}.-bottom-1\\/2{bottom:-50%}.left-0{left:0}.right-0{right:0}.grid{display:grid}.mb-16{margin-bottom:4rem}.mb-8{margin-bottom:2rem}.h-1\\/2{height:50%}.max-w-520px{max-width:520px}.min-h-screen{min-height:100vh}.place-content-center{place-content:center}.overflow-hidden{overflow:hidden}.bg-white{--un-bg-opacity:1;background-color:rgb(255 255 255/var(--un-bg-opacity))}.px-8{padding-left:2rem;padding-right:2rem}.text-center{text-align:center}.text-8xl{font-size:6rem;line-height:1}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-black{--un-text-opacity:1;color:rgb(0 0 0/var(--un-text-opacity))}.font-light{font-weight:300}.font-medium{font-weight:500}.leading-tight{line-height:1.25}.font-sans{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}@media(prefers-color-scheme:dark){.dark\\:bg-black{--un-bg-opacity:1;background-color:rgb(0 0 0/var(--un-bg-opacity))}.dark\\:text-white{--un-text-opacity:1;color:rgb(255 255 255/var(--un-text-opacity))}}@media(min-width:640px){.sm\\:px-0{padding-left:0;padding-right:0}.sm\\:text-4xl{font-size:2.25rem;line-height:2.5rem}}</style><script>!function(){const e=document.createElement(\"link\").relList;if(!(e&&e.supports&&e.supports(\"modulepreload\"))){for(const e of document.querySelectorAll('link[rel=\"modulepreload\"]'))r(e);new MutationObserver(e=>{for(const o of e)if(\"childList\"===o.type)for(const e of o.addedNodes)\"LINK\"===e.tagName&&\"modulepreload\"===e.rel&&r(e)}).observe(document,{childList:!0,subtree:!0})}function r(e){if(e.ep)return;e.ep=!0;const r=function(e){const r={};return e.integrity&&(r.integrity=e.integrity),e.referrerPolicy&&(r.referrerPolicy=e.referrerPolicy),\"use-credentials\"===e.crossOrigin?r.credentials=\"include\":\"anonymous\"===e.crossOrigin?r.credentials=\"omit\":r.credentials=\"same-origin\",r}(e);fetch(e.href,r)}}();<\/script></head><body class=\"antialiased bg-white dark:bg-black dark:text-white font-sans grid min-h-screen overflow-hidden place-content-center text-black\"><div class=\"-bottom-1/2 fixed h-1/2 left-0 right-0 spotlight\"></div><div class=\"max-w-520px text-center\"><h1 class=\"font-medium mb-8 sm:text-10xl text-8xl\">" + escapeHtml(messages.status) + "</h1><p class=\"font-light leading-tight mb-16 px-8 sm:px-0 sm:text-4xl text-xl\">" + escapeHtml(messages.description) + "</p></div></body></html>";
+	return "<!DOCTYPE html><html lang=\"en\"><head><title>" + escapeHtml(messages.status) + " - " + escapeHtml(messages.statusText) + " | " + escapeHtml(messages.appName) + "</title><meta charset=\"utf-8\"><meta content=\"width=device-width,initial-scale=1,minimum-scale=1\" name=\"viewport\"><style>.spotlight{background:linear-gradient(45deg,#00dc82,#36e4da 50%,#0047e1);filter:blur(20vh)}*,:after,:before{border-color:var(--un-default-border-color,#e5e7eb);border-style:solid;border-width:0;box-sizing:border-box}:after,:before{--un-content:\"\"}html{line-height:1.5;-webkit-text-size-adjust:100%;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-moz-tab-size:4;tab-size:4;-webkit-tap-highlight-color:transparent}body{line-height:inherit;margin:0}h1{font-size:inherit;font-weight:inherit}h1,p{margin:0}*,:after,:before{--un-rotate:0;--un-rotate-x:0;--un-rotate-y:0;--un-rotate-z:0;--un-scale-x:1;--un-scale-y:1;--un-scale-z:1;--un-skew-x:0;--un-skew-y:0;--un-translate-x:0;--un-translate-y:0;--un-translate-z:0;--un-pan-x: ;--un-pan-y: ;--un-pinch-zoom: ;--un-scroll-snap-strictness:proximity;--un-ordinal: ;--un-slashed-zero: ;--un-numeric-figure: ;--un-numeric-spacing: ;--un-numeric-fraction: ;--un-border-spacing-x:0;--un-border-spacing-y:0;--un-ring-offset-shadow:0 0 transparent;--un-ring-shadow:0 0 transparent;--un-shadow-inset: ;--un-shadow:0 0 transparent;--un-ring-inset: ;--un-ring-offset-width:0px;--un-ring-offset-color:#fff;--un-ring-width:0px;--un-ring-color:rgba(147,197,253,.5);--un-blur: ;--un-brightness: ;--un-contrast: ;--un-drop-shadow: ;--un-grayscale: ;--un-hue-rotate: ;--un-invert: ;--un-saturate: ;--un-sepia: ;--un-backdrop-blur: ;--un-backdrop-brightness: ;--un-backdrop-contrast: ;--un-backdrop-grayscale: ;--un-backdrop-hue-rotate: ;--un-backdrop-invert: ;--un-backdrop-opacity: ;--un-backdrop-saturate: ;--un-backdrop-sepia: }.fixed{position:fixed}.-bottom-1\\/2{bottom:-50%}.left-0{left:0}.right-0{right:0}.grid{display:grid}.mb-16{margin-bottom:4rem}.mb-8{margin-bottom:2rem}.h-1\\/2{height:50%}.max-w-520px{max-width:520px}.min-h-screen{min-height:100vh}.place-content-center{place-content:center}.overflow-hidden{overflow:hidden}.bg-white{--un-bg-opacity:1;background-color:rgb(255 255 255/var(--un-bg-opacity))}.px-8{padding-left:2rem;padding-right:2rem}.text-center{text-align:center}.text-8xl{font-size:6rem;line-height:1}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-black{--un-text-opacity:1;color:rgb(0 0 0/var(--un-text-opacity))}.font-light{font-weight:300}.font-medium{font-weight:500}.leading-tight{line-height:1.25}.font-sans{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}@media(prefers-color-scheme:dark){.dark\\:bg-black{--un-bg-opacity:1;background-color:rgb(0 0 0/var(--un-bg-opacity))}.dark\\:text-white{--un-text-opacity:1;color:rgb(255 255 255/var(--un-text-opacity))}}@media(min-width:640px){.sm\\:px-0{padding-left:0;padding-right:0}.sm\\:text-4xl{font-size:2.25rem;line-height:2.5rem}}</style><script>!function(){const e=document.createElement(\"link\").relList;if(!(e&&e.supports&&e.supports(\"modulepreload\"))){for(const e of document.querySelectorAll('link[rel=\"modulepreload\"]'))r(e);new MutationObserver(e=>{for(const o of e)if(\"childList\"===o.type)for(const e of o.addedNodes)\"LINK\"===e.tagName&&\"modulepreload\"===e.rel&&r(e)}).observe(document,{childList:!0,subtree:!0})}function r(e){if(e.ep)return;e.ep=!0;const r=function(e){const r={};return e.integrity&&(r.integrity=e.integrity),e.referrerPolicy&&(r.referrerPolicy=e.referrerPolicy),\"use-credentials\"===e.crossOrigin?r.credentials=\"include\":\"anonymous\"===e.crossOrigin?r.credentials=\"omit\":r.credentials=\"same-origin\",r}(e);fetch(e.href,r)}}();<\/script></head><body class=\"antialiased bg-white dark:bg-black dark:text-white font-sans grid min-h-screen overflow-hidden place-content-center text-black\"><div class=\"-bottom-1/2 fixed h-1/2 left-0 right-0 spotlight\"></div><div class=\"max-w-520px text-center\"><h1 class=\"font-medium mb-8 sm:text-10xl text-8xl\">" + escapeHtml(messages.status) + "</h1><p class=\"font-light leading-tight mb-16 px-8 sm:px-0 sm:text-4xl text-xl\">" + escapeHtml(messages.description) + "</p></div></body></html>";
 };
 
 const error500 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
@@ -3087,6 +3216,8 @@ const HAS_APP_TELEPORTS = !!(appTeleportAttrs.id);
 const APP_TELEPORT_OPEN_TAG = HAS_APP_TELEPORTS ? `<${appTeleportTag}${propsToString(appTeleportAttrs)}>` : "";
 const APP_TELEPORT_CLOSE_TAG = HAS_APP_TELEPORTS ? `</${appTeleportTag}>` : "";
 const PAYLOAD_URL_RE = /^[^?]*\/_payload.json(?:\?.*)?$/ ;
+const PAYLOAD_FILENAME = "_payload.json" ;
+const PAYLOAD_BUILD_ID_PARAM = "_b";
 const handler = defineRenderHandler((event) => {
 	
 	const ssrError = event.path.startsWith("/__nuxt_error") ? getQuery$1(event) : null;
@@ -3124,9 +3255,11 @@ async function renderRoute(event, ssrError) {
 	!ssrContext.noSSR && (NUXT_RUNTIME_PAYLOAD_EXTRACTION);
 	const isRenderingPayload = (routeOptions.prerender) && PAYLOAD_URL_RE.test(ssrContext.url);
 	if (isRenderingPayload) {
-		const url = ssrContext.url.substring(0, ssrContext.url.lastIndexOf("/")) || "/";
-		ssrContext.url = url;
-		event._path = event.node.req.url = url;
+		const payloadURL = new URL(ssrContext.url, "http://localhost");
+		const url = payloadURL.pathname.slice(0, -`/${PAYLOAD_FILENAME}`.length) || "/";
+		payloadURL.searchParams.delete(PAYLOAD_BUILD_ID_PARAM);
+		ssrContext.url = url + payloadURL.search;
+		event._path = event.node.req.url = ssrContext.url;
 	}
 	
 	const renderer = await getRenderer(ssrContext);
@@ -3202,14 +3335,9 @@ async function renderRoute(event, ssrError) {
 		
 		
 		
-		if (ssrContext["~lazyHydratedModules"]) {
-			for (const id of ssrContext["~lazyHydratedModules"]) {
-				ssrContext.modules?.delete(id);
-			}
-		}
-		
-		ssrContext.head.push({ link: getPreloadLinks(ssrContext, renderer.rendererContext) }, headEntryOptions);
-		ssrContext.head.push({ link: getPrefetchLinks(ssrContext, renderer.rendererContext) }, headEntryOptions);
+		const dependencyOptions = ssrContext["~lazyHydratedModules"]?.size ? { exclude: ssrContext["~lazyHydratedModules"] } : undefined;
+		const stylesheetHrefs = new Set(link.map((l) => l.href));
+		ssrContext.head.push({ link: [...getPreloadLinks(ssrContext, renderer.rendererContext, dependencyOptions), ...getPrefetchLinks(ssrContext, renderer.rendererContext, dependencyOptions)].filter((l) => !stylesheetHrefs.has(l.href)) }, headEntryOptions);
 		
 		ssrContext.head.push({ script: renderPayloadJsonScript({
 			ssrContext,
