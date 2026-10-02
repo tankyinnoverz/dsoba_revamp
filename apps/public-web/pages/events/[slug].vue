@@ -1,1 +1,9 @@
-<template><div class="mx-auto max-w-3xl px-6 py-20"><p class="text-xs font-bold uppercase tracking-[.2em] text-[#7a2737]">Event</p><h1 class="serif mt-4 text-5xl">105th Annual Dinner</h1><p class="mt-6 leading-8 text-[#102231]/70">Structured event detail placeholder with future registration integration.</p></div></template>
+
+<script setup lang="ts">
+import { events } from '~/data/content'
+const route = useRoute()
+const item = events.find((entry) => entry.slug === route.params.slug)
+if (!item) throw createError({ statusCode: 404, statusMessage: 'Event not found' })
+useSeoMeta({ title: item.title })
+</script>
+<template><ContentPageLayout :eyebrow="item!.category" :title="item!.title" :intro="item!.excerpt"><div class="grid gap-8 md:grid-cols-[1.4fr_.6fr]"><ResponsiveImage :src="item!.image" :alt="item!.title"/><Card class="p-7"><Badge>{{item!.status}}</Badge><p class="mt-6 font-bold text-[#7a2737]">{{item!.date}}</p><p class="mt-2">{{item!.venue}}</p><p class="mt-8 text-sm leading-6 text-[#102231]/60">Registration is not live. This is a Sprint 0 demonstration.</p></Card></div></ContentPageLayout></template>

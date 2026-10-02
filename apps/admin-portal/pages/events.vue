@@ -1,0 +1,1 @@
+<template><div><h1 class="text-5xl">Events</h1><div class="mt-8 grid gap-4 md:grid-cols-2"><AdminCard v-for="e in ['105th Annual Dinner','Summer Alumni Happy Hour','Charity Service Day']" :key="e"><p class="text-xs font-bold uppercase text-[#7a2737]">Draft / demo</p><h2 class="mt-2 text-2xl">{{e}}</h2></AdminCard></div></div></template>

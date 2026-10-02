@@ -1,0 +1,1 @@
+@tailwind base;@tailwind components;@tailwind utilities;body{margin:0;background:#f3efe6;color:#102231;font-family:"Trebuchet MS",sans-serif}h1,h2{font-family:Georgia,serif}:focus-visible{outline:3px solid #d6ad55;outline-offset:3px}

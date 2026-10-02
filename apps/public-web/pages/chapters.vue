@@ -1,1 +1,4 @@
-<template><div class="mx-auto max-w-4xl px-6 py-20"><h1 class="serif text-6xl">Chapters</h1><p class="mt-4 text-[#102231]/60">Professional and overseas community entry points.</p></div></template>
+<script setup lang="ts">
+import{chapters}from'~/data/content';const { t } = useLocale();useSeoMeta({title:t('chapters')})
+</script>
+<template><ContentPageLayout :eyebrow="t('chaptersEyebrow')" :title="t('chaptersTitle')" :intro="t('chaptersIntro')"><div class="grid gap-5 md:grid-cols-3"><ChapterCard v-for="c in chapters" :key="c.name" :item="c"/></div></ContentPageLayout></template>

@@ -1,0 +1,4 @@
+<script setup lang="ts">
+import{adminNavigation as links}from'~/data/navigation';const open=ref(false)
+</script>
+<template><div class="min-h-screen lg:grid lg:grid-cols-[260px_1fr]"><aside class="bg-[#102231] text-white"><div class="flex h-20 items-center justify-between px-6"><NuxtLink to="/" class="font-serif text-2xl text-[#d6ad55]">DSOBA Admin</NuxtLink><button class="text-2xl lg:hidden" aria-label="Toggle navigation" @click="open=!open">☰</button></div><nav :class="[open?'block':'hidden','px-4 pb-5 lg:block']"><NuxtLink v-for="i in links" :key="i.to" :to="i.to" class="block border-b border-white/10 px-3 py-4 text-sm font-bold text-white/75">{{i.label}}<small class="block font-normal text-white/35">{{i.permission}}</small></NuxtLink></nav></aside><div><div class="bg-[#d6ad55] px-5 py-2 text-center text-xs font-bold">DEMO ADMIN — no workflow changes are persisted.</div><main class="mx-auto max-w-6xl px-5 py-10"><slot/></main></div></div></template>

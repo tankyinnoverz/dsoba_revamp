@@ -11,6 +11,6 @@
     "dev:api": "corepack pnpm --filter @dsoba/api dev",
     "build": "corepack pnpm -r build",
     "lint": "corepack pnpm -r lint",
-    "test": "corepack pnpm -r test"
+    "test": "corepack pnpm --filter api build && node --test scripts/acceptance/security-persistence.test.mjs scripts/acceptance/membership-grace.test.mjs scripts/acceptance/membership-lifecycle.test.mjs scripts/acceptance/http-workflow.test.mjs scripts/acceptance/local-providers.test.mjs scripts/acceptance/smtp2go.test.mjs"
   }
 }

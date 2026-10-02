@@ -1,0 +1,4 @@
+<script setup lang="ts">
+useSeoMeta({ title: 'Membership fees' })
+</script>
+<template><ContentPageLayout eyebrow="MEMBERSHIP" title="Clear membership pathways." intro="Fees and payment instructions will be confirmed by the Association before launch."><div class="grid gap-5 md:grid-cols-3"><Card v-for="item in [{name:'Youth',fee:'No fee',detail:'Unpaid; under 18; no voting rights.'},{name:'Trial',fee:'No fee',detail:'Unpaid adult membership before Trial expiry; no voting rights.'},{name:'Life',fee:'HKD 2,000',detail:'Verified payment required. Under-18 Life is displayed as Life (Youth).'}]" :key="item.name" class="p-7"><p class="eyebrow">{{ item.name }}</p><h2 class="mt-4 text-4xl">{{ item.fee }}</h2><p class="mt-4 leading-7 text-[#102231]/70">{{ item.detail }}</p></Card></div><p class="mt-8 text-sm text-[#102231]/60">Refund and payment-proof instructions require final policy approval.</p></ContentPageLayout></template>

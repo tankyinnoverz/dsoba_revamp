@@ -1,0 +1,1 @@
+<template><div><h1 class="text-5xl">Applications</h1><p class="mt-4 text-gray-600">Review queue shell with no approval actions.</p><AdminState class="mt-8" title="No application selected">Selection, review and approval workflows begin after Sprint 0.</AdminState></div></template>

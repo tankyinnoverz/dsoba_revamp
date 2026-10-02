@@ -4,7 +4,15 @@ node_modules/
 dist/
 build/
 .env
+env/config.txt
+env/
+.pnpm-store/
+resources/Old_Data/*.csv
+resources/Old_Data/*.json
+resources/Old_Data/desktop.ini
 .env.*
 !.env.example
 *.log
+data/*.sqlite
+resources/Old_Data/Members.quarantine.csv
 .DS_Store

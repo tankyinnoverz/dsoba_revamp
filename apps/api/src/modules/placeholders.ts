@@ -1,0 +1,2 @@
+import{Module}from'@nestjs/common';
+@Module({})export class AuthModule{}@Module({})export class AccountsModule{}@Module({})export class MembersModule{}@Module({})export class ApplicationsModule{}@Module({})export class MembershipModule{}@Module({})export class DirectoryModule{}@Module({})export class EventsModule{}@Module({})export class PaymentsModule{}@Module({})export class CommunicationsModule{}@Module({})export class CmsModule{}@Module({})export class AuditModule{}

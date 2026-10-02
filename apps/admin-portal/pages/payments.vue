@@ -1,0 +1,1 @@
+<template><div><h1 class="text-5xl">Payments</h1><p class="mt-4 text-gray-600">Payment exception monitoring shell only.</p><AdminState class="mt-8" title="No live payment provider">Transactions cannot be captured, refunded or reconciled.</AdminState></div></template>

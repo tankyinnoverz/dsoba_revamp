@@ -1,0 +1,4 @@
+<script setup lang="ts">
+useSeoMeta({ title: 'Accessibility' })
+</script>
+<template><ContentPageLayout eyebrow="LEGAL" title="Designed to be welcoming." intro="We are building the site for keyboard, mobile and assistive-technology use."><div class="grid gap-5 md:grid-cols-3"><Card v-for="item in [{title:'Keyboard access',text:'Skip links, visible focus and labelled controls are included in the shared layout.'},{title:'Responsive design',text:'Critical public routes are checked at desktop and mobile widths.'},{title:'Contact us',text:'Report an accessibility barrier through the Contact page while the final statement is prepared.'}]" :key="item.title" class="p-7"><h2 class="text-3xl">{{ item.title }}</h2><p class="mt-4 leading-7 text-[#102231]/70">{{ item.text }}</p></Card></div><NuxtLink to="/contact" class="mt-8 inline-flex rounded-full bg-[#d6ad55] px-5 py-3 font-bold">Contact DSOBA</NuxtLink></ContentPageLayout></template>

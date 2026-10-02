@@ -1,0 +1,4 @@
+<script setup lang="ts">
+useSeoMeta({ title: 'Privacy policy' })
+</script>
+<template><ContentPageLayout eyebrow="LEGAL" title="Privacy policy" intro="This staging page marks the content structure for the Association’s final privacy notice."><article class="prose max-w-3xl"><h2>Information we collect</h2><p>Membership applications may include identity, contact, school attendance and declaration details. Member Portal profile and directory visibility settings are controlled by the member.</p><h2>How information is used</h2><p>Information is used to review membership, provide member services, manage events and communicate Association updates.</p><h2>Directory privacy</h2><p>Directory visibility is opt-in. Hidden fields must not be returned by the service.</p><h2>Retention and enquiries</h2><p>Retention periods, data-subject rights and the Association privacy contact will be added after legal review.</p></article></ContentPageLayout></template>

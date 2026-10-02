@@ -1,1 +1,4 @@
-<template><div class="mx-auto max-w-4xl px-6 py-20"><h1 class="serif text-6xl">Contact</h1><p class="mt-4 text-[#102231]/60">A structured contact page placeholder.</p></div></template>
+<script setup lang="ts">
+const { t } = useLocale();useSeoMeta({title:t('contact')})
+</script>
+<template><ContentPageLayout :eyebrow="t('contactEyebrow')" :title="t('contactTitle')" :intro="t('contactIntro')"><div class="grid gap-10 md:grid-cols-2"><form class="space-y-5" @submit.prevent><label class="block font-bold">Name<input class="mt-2 w-full border border-[#102231]/25 bg-white p-3"></label><label class="block font-bold">Email<input type="email" class="mt-2 w-full border border-[#102231]/25 bg-white p-3"></label><label class="block font-bold">Message<textarea rows="5" class="mt-2 w-full border border-[#102231]/25 bg-white p-3"></textarea></label><Button type="submit">{{t('demo')}}</Button><p class="text-sm text-[#7a2737]">{{t('demoOnly')}}</p></form><Card class="p-8"><p class="eyebrow">{{t('contact')}}</p><h2 class="mt-3 text-3xl">DSOBA Secretariat</h2><p class="mt-5 leading-7 text-[#102231]/65">{{t('heritageBody')}}</p></Card></div></ContentPageLayout></template>

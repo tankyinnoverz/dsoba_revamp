@@ -1,13 +1,2 @@
-import 'reflect-metadata'
-import { NestFactory } from '@nestjs/core'
-import { Controller, Get, Module } from '@nestjs/common'
-
-@Controller('health')
-class HealthController { @Get() getHealth() { return { status: 'ok', service: 'dsoba-api', version: 'v1' } } }
-@Module({ controllers: [HealthController] }) class AppModule {}
-
-const app = await NestFactory.create(AppModule)
-app.setGlobalPrefix('api/v1')
-app.enableVersioning()
-await app.listen(Number(process.env.API_PORT ?? 4000))
-console.log(`DSOBA API listening on ${await app.getUrl()}`)
+import'reflect-metadata';import{Logger}from'@nestjs/common';import{NestFactory}from'@nestjs/core';import{AppModule}from'./app.module.js';import{AllExceptionsFilter}from'./common/all-exceptions.filter.js';import{readEnvironment}from'./config/environment.js';
+const env=readEnvironment();const app=await NestFactory.create(AppModule,{bufferLogs:true});app.useLogger(new Logger('DSOBA API'));app.setGlobalPrefix('api/v1');app.enableCors({origin:env.corsOrigins,credentials:true});app.useGlobalFilters(new AllExceptionsFilter());await app.listen(env.port);Logger.log(`Listening on ${await app.getUrl()}`,'Bootstrap');

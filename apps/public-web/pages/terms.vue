@@ -1,0 +1,4 @@
+<script setup lang="ts">
+useSeoMeta({ title: 'Terms and conditions' })
+</script>
+<template><ContentPageLayout eyebrow="LEGAL" title="Terms and conditions" intro="This staging page marks the content structure for the Association’s final terms."><article class="prose max-w-3xl"><h2>Using this website</h2><p>Use the website lawfully and provide accurate information when submitting an application or event registration.</p><h2>Membership applications</h2><p>Submitting an application does not create membership or Member Portal access. Approval remains a General Committee decision.</p><h2>Events and communications</h2><p>Event capacity, cancellation and communication rules will be shown on each event page before registration.</p><h2>Final approval</h2><p>Association counsel and the content owner must approve the final legal wording before launch.</p></article></ContentPageLayout></template>

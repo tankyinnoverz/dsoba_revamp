@@ -1,0 +1,1 @@
+<template><div aria-live="polite" class="space-y-3"><span class="sr-only">Loading demonstration content</span><div v-for="i in 3" :key="i" class="h-20 animate-pulse bg-[#102231]/10"></div></div></template>

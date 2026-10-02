@@ -1,1 +1,4 @@
-<template><div class="mx-auto max-w-6xl px-6 py-20"><h1 class="serif text-6xl">Events</h1><p class="mt-4 text-[#102231]/60">Annual traditions, chapters, sport and social gatherings.</p></div></template>
+<script setup lang="ts">
+import{events}from'~/data/content';const { t } = useLocale();useSeoMeta({title:t('events')})
+</script>
+<template><ContentPageLayout :eyebrow="t('calendar')" :title="t('gather')" :intro="t('upcomingEvents')"><EventList :items="events"/></ContentPageLayout></template>

@@ -1,1 +1,1 @@
-export default defineNuxtConfig({ devtools:{enabled:false}, modules:['@nuxtjs/tailwindcss'], app:{head:{title:'DSOBA Member Portal'}} })
+export default defineNuxtConfig({devtools:{enabled:false},modules:['@nuxtjs/tailwindcss'],css:['~/assets/css/main.css'],runtimeConfig:{public:{apiBase:process.env.NUXT_PUBLIC_API_BASE??'http://localhost:4000/api/v1'}},app:{head:{title:'DSOBA Member Portal'}}})

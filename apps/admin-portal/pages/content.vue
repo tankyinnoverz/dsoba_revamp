@@ -1,0 +1,1 @@
+<template><div><h1 class="text-5xl">Content</h1><div class="mt-8 grid gap-4 sm:grid-cols-2"><AdminCard v-for="c in ['News stories','Events','Association pages','Navigation']" :key="c"><h2 class="text-2xl">{{c}}</h2><p class="mt-2 text-sm text-gray-500">CMS persistence not connected.</p></AdminCard></div></div></template>

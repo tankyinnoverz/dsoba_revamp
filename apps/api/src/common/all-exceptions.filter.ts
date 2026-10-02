@@ -1,0 +1,3 @@
+import{ArgumentsHost,Catch,ExceptionFilter,HttpException,HttpStatus,Logger}from'@nestjs/common';
+interface HttpResponse{status(code:number):HttpResponse;json(body:Record<string,unknown>):void}
+@Catch()export class AllExceptionsFilter implements ExceptionFilter{private readonly logger=new Logger(AllExceptionsFilter.name);catch(error:unknown,host:ArgumentsHost){const response=host.switchToHttp().getResponse<HttpResponse>();const status=error instanceof HttpException?error.getStatus():HttpStatus.INTERNAL_SERVER_ERROR;const message=error instanceof HttpException?error.message:'Internal server error';if(status>=500)this.logger.error(error);response.status(status).json({statusCode:status,message,timestamp:new Date().toISOString()})}}

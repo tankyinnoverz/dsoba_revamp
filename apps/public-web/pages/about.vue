@@ -1,1 +1,4 @@
-<template><div class="mx-auto max-w-4xl px-6 py-20"><p class="text-xs font-bold uppercase tracking-[.2em] text-[#7a2737]">About DSOBA</p><h1 class="serif mt-4 text-6xl">Our story</h1><p class="mt-6 max-w-2xl text-lg leading-8 text-[#102231]/70">A century of friendship, service and shared purpose — carried forward by every generation.</p></div></template>
+<script setup lang="ts">
+const { t } = useLocale();useSeoMeta({title:t('about')})
+</script>
+<template><ContentPageLayout :eyebrow="t('aboutEyebrow')" :title="t('aboutTitle')" :intro="t('aboutIntro')"><div class="grid gap-10 md:grid-cols-2"><div><h2 class="text-4xl">{{t('ourStory')}}</h2><p class="mt-5 leading-8 text-[#102231]/70">{{t('heritageBody')}}</p></div><ResponsiveImage src="/assets/grand-steps.jpg" alt="Historic school steps"/></div></ContentPageLayout></template>
